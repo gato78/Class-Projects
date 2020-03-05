@@ -18,3 +18,31 @@ def getNode(point_Node):
 	node = node_removed[1]
 	cost = node_removed[0]
 	return node, cost
+
+# Custom input function to verify inputs are integer numbers
+def inputIntegerNumber(msg):
+  while True:
+    try:
+       usrInput = int(input(msg))       
+    except ValueError:
+       print("Value must be an integer! Please try again!")
+       continue
+    else:
+       return usrInput 
+       break 
+
+# Function to prompt user to enter start and goal nodes coordinates
+def get_input_coordinates():
+	print("===========================================")
+	print("Point Robot - Dijkstra's Algorithm Program ")
+	print("===========================================")
+	print("Please enter Start-Node (x,y) Coordinates")
+	start_x = inputIntegerNumber(" Enter x coordinate value : ")
+	start_y = inputIntegerNumber(" Enter y coordinate value : ")
+	start_node = (start_x,start_y)
+	print("Please enter Goal-Node (x,y) Coordinates")
+	goal_x = inputIntegerNumber(" Enter x coordinate value : ")
+	goal_y = inputIntegerNumber(" Enter y coordinate value : ")	
+	goal_node = (goal_x,goal_y)
+	print("Running Djikstra's Algorithm Simulation...")
+	return start_node, goal_node
