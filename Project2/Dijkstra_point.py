@@ -33,16 +33,43 @@ def inputIntegerNumber(msg):
 
 # Function to prompt user to enter start and goal nodes coordinates
 def get_input_coordinates():
+
+	inputStartFlag = True
+	inputGoalFlag = True
+	
 	print("===========================================")
 	print("Point Robot - Dijkstra's Algorithm Program ")
 	print("===========================================")
-	print("Please enter Start-Node (x,y) Coordinates")
-	start_x = inputIntegerNumber(" Enter x coordinate value : ")
-	start_y = inputIntegerNumber(" Enter y coordinate value : ")
-	start_node = (start_x,start_y)
-	print("Please enter Goal-Node (x,y) Coordinates")
-	goal_x = inputIntegerNumber(" Enter x coordinate value : ")
-	goal_y = inputIntegerNumber(" Enter y coordinate value : ")	
-	goal_node = (goal_x,goal_y)
+	
+	while inputStartFlag:
+		print("Please enter Start-Node (x,y) Coordinates")
+		start_x = inputIntegerNumber("Enter x coordinate value : ")
+		start_y = inputIntegerNumber("Enter y coordinate value : ")
+		if start_x >= 0 and start_x <= 300 and start_y >= 0 and start_y <= 200:
+			if point_robot_obstacle_space(start_x, start_y) is not True:
+				start_node = (start_x,start_y)
+				inputStartFlag = False
+			else:
+				print("Goal Node coordinates are inside the obstacles boundaries...")
+				print("Please try again!!")
+		else:
+			print("Start Node input coordinates are outside of map boundaries ...")
+			print("Please try again!!")
+	
+	while inputGoalFlag:
+		print("Please enter Goal-Node (x,y) Coordinates")
+		goal_x = inputIntegerNumber("Enter x coordinate value : ")
+		goal_y = inputIntegerNumber("Enter y coordinate value : ")
+		if goal_x >= 0 and goal_x <= 300 and goal_y >= 0 and goal_y <= 200:
+			if point_robot_obstacle_space(goal_x, goal_y) is not True:
+				goal_node = (goal_x,goal_y)
+				inputGoalFlag = False
+			else:
+				print("Goal Node coordinates are inside the obstacles boundaries...")
+				print("Please try again!!")
+		else:
+			print("Goal Node input coordinates are outside of map boundaries ...")
+			print("Please try again!!")
+			
 	print("Running Djikstra's Algorithm Simulation...")
 	return start_node, goal_node
