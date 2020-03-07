@@ -150,3 +150,75 @@ def backtrackingStartGoalPath(start,goal,explored_path):
 		goalpath = explored_path[goalpath]
 	pathlist.reverse()
 	return pathlist
+	
+# Increasing screen display size to improve user visualization 
+def display_resized(factor,obs_list,djikstra_p, vis_node_l):
+	obstacles_list_res = []
+	for i in obs_list:
+		x = i[0]*factor
+		y = i[1]*factor
+		obstacles_list_res.append([x,y])
+		
+	djikstra_path_res = []
+	for i in djikstra_p:
+		x = i[0]*factor
+		y = i[1]*factor
+		djikstra_path_res.append((x,y))
+		
+	visited_nodes_res = {}
+	for key, value in vis_node_l.items() :
+		idx1 = key[0]*factor
+		idx2 = key[1]*factor
+		index = (idx1,idx2)
+		if value == 0:
+			visited_nodes_res[index] = 0
+		else:
+			val1 = value[0]*factor
+			val2 = value[1]*factor
+			val = (val1,val2)
+			visited_nodes_res[index] = val
+	return obstacles_list_res, djikstra_path_res, visited_nodes_res
+	
+# Play animation of how Djistra Algorithm works in 2D space including obstacles  	
+def pygame_animation(resize, obs_lst,djik_path,v_nodes):
+	pyg.init()
+	
+	#Defining the colors
+	Green = [0, 255, 0]
+	Blue = [0, 100, 255]
+	White = [255, 255, 255]
+	Black = [0, 0, 0]
+	
+	#Setting up size of simulation display and resizing of screen acording to resize parameter
+	width = 300*resize
+	height = 200*resize
+	SIZE = [width, height]
+	console_screen = pyg.display.set_mode(SIZE)	
+	obstacles_list_resized, djikstra_path_resized, visited_nodes_resized = display_resized(resize,obs_lst,djik_path,v_nodes)
+	
+	# Running simulation which remains on for 8 seconds after Shortest path is drawn and then closes down. 
+	RUN_PROGRAM = True
+	while RUN_PROGRAM:
+		for event in pyg.event.get():   
+			if event.type == pyg.QUIT:  
+				RUN_PROGRAM = False   
+		console_screen.fill(Black)
+		#Painting obstacles space inside map
+		for node in obstacles_list_resized:
+			pyg.draw.rect(console_screen, Blue, [node[0],200*resize-node[1],resize,resize])
+		pyg.display.update()
+		#Painting the visited nodes space inside map
+		for node in visited_nodes_resized:
+			#pyg.time.wait(1)
+			pyg.draw.rect(console_screen, White, [node[0],200*resize-node[1],resize,resize])
+			pyg.display.update()
+		# #Painting the path from start node to goal node
+		for node in djikstra_path_resized:
+			pyg.time.wait(1)
+			pyg.draw.rect(console_screen, Black, [node[0],200*resize-node[1], resize,resize])
+			pyg.display.update()
+
+		pyg.time.wait(8000)		# freeze display window for 8 seconds to show path to Goal Node
+		RUN_PROGRAM = False
+	pyg.quit()
+
