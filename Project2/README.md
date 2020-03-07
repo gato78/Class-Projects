@@ -41,6 +41,12 @@
   <p>Program will then execute and once data results are obtained it will displayed them as a pygame animation 
 <p>IMPORTANT NOTE: If you would like to adjust the size of the simulation screen to see the animation better, you can change the variable display_resize between values 1 to 3 ( 1 smallest display and 3 largest display). This variable is located in line 273 of the python code. An easier way to find it is by scrolling to the bottom of the file, it should be the second to last line of code.
 
+# DJIKSTRA_RIGID.PY EXECUTION TIME :
+<p>To execute the algorithm takes about 26.4 seconds
+<p>Then the pygame simulation phase takes about 42.1 seconds.
+<p>However, the pygame simulation phase includes a delay of 8 seconds purposely added to allow time for the user to see the shortest path display. However, this can be adjusted as needed if a shorter simulation time is required.
+<p>In total for complete execution = 26.4 + 42.1 = 68.5 seconds
+
 ## Function Descriptions:
 <li>addNewNode(point_Node, newNode_cost, newNode) : Adds a new node to the Priority Queue Node List. It uses the node cost as a priority index for the Queue.</li>
 <li>getNode(point_Node) : It removes a node from the Priority Queue and retrieves its coordinates and cost.</li>
