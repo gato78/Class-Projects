@@ -2,7 +2,7 @@
 # HOW TO RUN DJIKSTRA_POINT.PY
 
 ## Simulation part 1 ( User inputs to program )
-<image src="Djikstra_point_robot_simulation_part1.jpg" width="320" height="200" ></image>
+<image src="Djikstra_point_robot_simulation_part1.jpg" width="640" height="480" ></image>
 
 # HOW TO RUN DJIKSTRA_RIGID.PY
 
