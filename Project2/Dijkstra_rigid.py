@@ -255,3 +255,21 @@ def pygame_animation(resize, obs_lst,djik_path,v_nodes):
 		pyg.time.wait(8000)		# freeze display window for 8 seconds to show path to Goal Node
 		RUN_PROGRAM = False
 	pyg.quit()
+	
+##############################################################################
+#           Main Program Execution											 #
+##############################################################################
+
+start_node, goal_node, c, r = get_input_coordinates()		# Gets user input and formats it for algorithm processing
+obstacles_list = generate_list_of_obstacle_nodes()			# Create list of obstacle nodes
+visited_nodes = applyingDijkstraAlgorithm(start_node, goal_node, c, r)	# Applying Djikstra Algorithm 
+djikstra_path = backtrackingStartGoalPath(start_node,goal_node,visited_nodes) # Extract Shortest path from visited nodes list
+
+print("============================================")
+print("  Djikstra's Algorithm - Backtracking Path")
+print("============================================")
+print("Shortest Path between Start and Goal Nodes = ",djikstra_path)	
+
+display_resize = 2		# Can be changed from 1 to 3 for better visualization
+pygame_animation(display_resize,obstacles_list,djikstra_path, visited_nodes)	# playing pygame animation 
+
