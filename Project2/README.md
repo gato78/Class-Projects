@@ -1,5 +1,12 @@
 # PROJECT 2
 
+##PROJECT DESCRIPTION:
+<p>The project objective is to implement Djikstra's algorithm to find the shortest path between start and goal nodes.
+<p>As part of the project the simulation will consist of 2 case scenarios:
+<li>Point Robot ( robot radius = 0 , No obstacle clearance )</li>
+<li>Rigid Robot ( robot radius = r , Obstacle clearance = c)</li>
+The implementation code is done using Python 3.
+
 ## HOW TO RUN DJIKSTRA_POINT.PY
 <p>Python version used:
   <p> Python 3.6.5
