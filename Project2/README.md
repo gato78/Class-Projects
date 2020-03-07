@@ -1,5 +1,16 @@
 # PROJECT 2
+
 # HOW TO RUN DJIKSTRA_POINT.PY
+<p>Python version used:
+  <p> Python 3.6.5
+<p> Python Libraries needed :
+  <p> pygame
+  <p> math
+<p> How to run program:
+  <p>Open console terminal and run command below:
+    <p>python Dijkstra_point.py
+  <p>Program should then start and ask the user to input start node coordinates and goal node coordinates
+  <p>Program will then execute and once data results are obtained it will displayed them as a pygame animation 
 
 ## Simulation part 1 ( User inputs to program )
 <image src="Djikstra_point_robot_simulation_part1.jpg" width="640" height="480" ></image>
