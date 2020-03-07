@@ -1,6 +1,6 @@
 # PROJECT 2
 
-# HOW TO RUN DJIKSTRA_POINT.PY
+## HOW TO RUN DJIKSTRA_POINT.PY
 <p>Python version used:
   <p> Python 3.6.5
 <p> Python Libraries needed :
@@ -11,6 +11,7 @@
     <p>python Dijkstra_point.py
   <p>Program should then start and ask the user to input start node coordinates and goal node coordinates
   <p>Program will then execute and once data results are obtained it will displayed them as a pygame animation 
+<p>IMPORTANT NOTE: If you would like to adjust the size of the simulation screen to see the animation better, you can change the variable display_resize between values 1 to 3 ( 1 smallest display and 3 largest display). This variable is located in line 245 of the python code. An easier way to find it is by scrolling to the bottom of the file, it should be the second to last line of code.    
 
 ## Simulation part 1 ( User inputs to program )
 <image src="Djikstra_point_robot_simulation_part1.jpg" width="640" height="480" ></image>
