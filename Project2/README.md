@@ -4,6 +4,12 @@
 ## Simulation part 1 ( User inputs to program )
 <image src="Djikstra_point_robot_simulation_part1.jpg" width="640" height="480" ></image>
 
+## Simulation part 2 ( Djikstra Algorithm visiting nodes in the map space )
+<image src="Djikstra_point_robot_simulation_part2.jpg" width="640" height="480" ></image>
+
+## Simulation part 3 ( Djikstra Algorithm showing shortest path between start and goal nodes )
+<image src="Djikstra_point_robot_simulation_part3.jpg" width="640" height="480" ></image>
+
 # HOW TO RUN DJIKSTRA_RIGID.PY
 
 ## Function Descriptions:
