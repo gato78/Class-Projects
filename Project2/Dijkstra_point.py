@@ -2,6 +2,11 @@ import pygame as pyg
 import math
 import heapq as hpq
 
+# Lists containing possible node moves and their respective costs
+ListOfNeighborsMoves = [(0, 1), (1, 0), (0, -1), (-1, 0), (-1, 1), (1, 1), (1, -1), (-1, -1)]
+ListOfNeighborsMovesCost = [1, 1, 1, 1, 1.4, 1.4, 1.4, 1.4]
+
+#Priority Queue List	
 class PointNode:
 	def __init__(self, Node_State_i=[], Node_Cost_i=0, Node_Parent_i=0):
 		self.Node_State_i = Node_State_i
@@ -107,3 +112,41 @@ def generate_list_of_obstacle_nodes():
 			if point_robot_obstacle_space(x,y):
 				obstacle_nodes.append([x,y])
 	return obstacle_nodes
+	
+# Implementing Djikstra's Algorithm
+def applyingDijkstraAlgorithm(start_node, goal_node):
+	exploredNodesPath = {}                 # Contains list of explored nodes
+	exploredNodesCost = {}                 # Contains list of explored nodes cost
+	exploredNodesPath[start_node] = 0
+	exploredNodesCost[start_node] = 0
+	ListOfNodes = PointNode()
+	addNewNode(ListOfNodes,0,start_node)
+	while len(ListOfNodes.Node_State_i) > 0:
+		currentNode, currentNodeCost= getNode(ListOfNodes)
+		if currentNode == goal_node:
+			break
+		for newNodeMove in ListOfNeighborsMoves:
+			newNode = (currentNode[0] + newNodeMove[0], currentNode[1] + newNodeMove[1])
+			if newNode[0] < 0 or newNode[1] < 0 :     
+				continue
+			if newNode[0] > 300 or newNode[1] > 200 :
+				continue
+			if point_robot_obstacle_space(newNode[0],newNode[1]) == True :
+				continue
+			newNodeCost = round(getCost(currentNodeCost,newNodeMove),3)
+			if newNode not in exploredNodesCost or newNodeCost < exploredNodesCost[newNode]:
+				exploredNodesCost[newNode] = newNodeCost
+				addNewNode(ListOfNodes,newNodeCost,newNode)
+				exploredNodesPath[newNode] = currentNode
+	return exploredNodesPath
+
+#Implementing backtracking algorithm between start node and goal node 
+def backtrackingStartGoalPath(start,goal,explored_path):
+	pathlist = []
+	goalpath = goal
+	pathlist.append(goal)
+	while goalpath != start:
+		pathlist.append(explored_path[goalpath])
+		goalpath = explored_path[goalpath]
+	pathlist.reverse()
+	return pathlist
