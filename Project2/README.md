@@ -29,7 +29,7 @@ The implementation code is done using Python 3.
 ## Simulation part 3 ( Djikstra Algorithm showing shortest path between start and goal nodes )
 <image src="Djikstra_point_robot_simulation_part3.jpg" width="640" height="480" ></image>
 
-# DJIKSTRA_POINT.PY EXECUTION TIME :
+## DJIKSTRA_POINT.PY EXECUTION TIME :
 <p>To execute the algorithm takes about 10.5 seconds
 <p>Then the pygame simulation phase takes about 24.7 seconds.
 <p>However, the pygame simulation phase includes a delay of 8 seconds purposely added to allow time for the user to see the shortest path display. However, this can be adjusted as needed if a shorter simulation time is required.
@@ -57,7 +57,7 @@ The implementation code is done using Python 3.
 ## Simulation part 3 ( Djikstra Algorithm showing shortest path between start and goal nodes )
 <image src="Djikstra_rigid_robot_simulation_part3.jpg" width="640" height="480" ></image>
 
-# DJIKSTRA_RIGID.PY EXECUTION TIME :
+## DJIKSTRA_RIGID.PY EXECUTION TIME :
 <p>To execute the algorithm takes about 26.4 seconds
 <p>Then the pygame simulation phase takes about 42.1 seconds.
 <p>However, the pygame simulation phase includes a delay of 8 seconds purposely added to allow time for the user to see the shortest path display. However, this can be adjusted as needed if a shorter simulation time is required.
