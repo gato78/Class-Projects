@@ -24,6 +24,12 @@ def getNode(point_Node):
 	cost = node_removed[0]
 	return node, cost
 
+#Get Cost from Current Node to Next Node
+def getCost(current_node_cost, new_node_move):
+	index = ListOfNeighborsMoves.index(new_node_move)
+	new_node_cost = current_node_cost + ListOfNeighborsMovesCost[index]
+	return new_node_cost
+
 # Custom input function to verify inputs are integer numbers
 def inputIntegerNumber(msg):
   while True:
@@ -221,4 +227,22 @@ def pygame_animation(resize, obs_lst,djik_path,v_nodes):
 		pyg.time.wait(8000)		# freeze display window for 8 seconds to show path to Goal Node
 		RUN_PROGRAM = False
 	pyg.quit()
+
+##############################################################################
+#           Main Program Execution											 #
+##############################################################################
+
+start_node, goal_node = get_input_coordinates()		# Gets user input and formats it for algorithm processing
+obstacles_list = generate_list_of_obstacle_nodes()			# Create list of obstacle nodes
+visited_nodes = applyingDijkstraAlgorithm(start_node, goal_node)	# Applying Djikstra Algorithm 
+djikstra_path = backtrackingStartGoalPath(start_node,goal_node,visited_nodes) # Extract Shortest path from visited nodes list
+
+print("============================================")
+print("  Djikstra's Algorithm - Backtracking Path")
+print("============================================")
+print("Shortest Path between Start and Goal Nodes = ",djikstra_path)	
+
+display_resize = 1		# default = 1, Can be increase between 2 and 3 for better visualization
+pygame_animation(display_resize,obstacles_list,djikstra_path, visited_nodes)	# playing pygame animation 
+
 
