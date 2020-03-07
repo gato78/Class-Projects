@@ -10,7 +10,11 @@
 ## Simulation part 3 ( Djikstra Algorithm showing shortest path between start and goal nodes )
 <image src="Djikstra_point_robot_simulation_part3.jpg" width="640" height="480" ></image>
 
-# HOW TO RUN DJIKSTRA_RIGID.PY
+# DJIKSTRA_RIGID.PY EXECUTION TIME :
+<p>To execute the algorithm takes about 10.5 seconds
+<p>Then the pygame simulation phase takes about 24.7 seconds.
+<p>However, the pygame simulation phase includes a delay of 8 seconds purposely added to allow time for the user to see the shortest path display. However, this can be adjusted as needed if a shorter simulation time is required.
+<p>In total for complete execution = 10.5 + 24.7 = 35.2 seconds
 
 ## Function Descriptions:
 <li>addNewNode(point_Node, newNode_cost, newNode) : Adds a new node to the Priority Queue Node List. It uses the node cost as a priority index for the Queue.</li>
