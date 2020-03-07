@@ -242,7 +242,7 @@ print("  Djikstra's Algorithm - Backtracking Path")
 print("============================================")
 print("Shortest Path between Start and Goal Nodes = ",djikstra_path)	
 
-display_resize = 1		# default = 1, Can be increase between 2 and 3 for better visualization
+display_resize = 2		# Can be changed from 1 to 3 for better visualization
 pygame_animation(display_resize,obstacles_list,djikstra_path, visited_nodes)	# playing pygame animation 
 
 
