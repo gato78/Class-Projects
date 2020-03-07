@@ -48,6 +48,15 @@ The implementation code is done using Python 3.
   <p>Program will then execute and once data results are obtained it will displayed them as a pygame animation 
 <p>IMPORTANT NOTE: If you would like to adjust the size of the simulation screen to see the animation better, you can change the variable display_resize between values 1 to 3 ( 1 smallest display and 3 largest display). This variable is located in line 273 of the python code. An easier way to find it is by scrolling to the bottom of the file, it should be the second to last line of code.
 
+## Simulation part 1 ( User inputs to program )
+<image src="Djikstra_rigid_robot_simulation_part1.jpg" width="640" height="480" ></image>
+
+## Simulation part 2 ( Djikstra Algorithm visiting nodes in the map space )
+<image src="Djikstra_rigid_robot_simulation_part2.jpg" width="640" height="480" ></image>
+
+## Simulation part 3 ( Djikstra Algorithm showing shortest path between start and goal nodes )
+<image src="Djikstra_rigid_robot_simulation_part3.jpg" width="640" height="480" ></image>
+
 # DJIKSTRA_RIGID.PY EXECUTION TIME :
 <p>To execute the algorithm takes about 26.4 seconds
 <p>Then the pygame simulation phase takes about 42.1 seconds.
