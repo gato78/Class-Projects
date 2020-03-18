@@ -93,6 +93,13 @@ def rigid_robot_obstacle_space(x,y,clearance,radius):
 		
     return obstacle	
 
+# Goal space threshold set to 1.5 unit radius 
+def rigid_robot_goal_space(x,y,goal_x,goal_y,radius = 1.5):
+	goal = False
+	if ((x - math.ceil(goal_x))**2 + math.ceil(y - (goal_y))**2 - math.ceil(radius)**2) <= 0:   # circle
+		goal = True
+	return goal
+
 # Implementing Djikstra's Algorithm
 def applyingDijkstraAlgorithm(start_node, goal_node):
 	exploredNodesPath = {}                 # Contains list of explored nodes
