@@ -6,6 +6,19 @@ import heapq as hpq
 ListOfNeighborsMoves = [-60, -30, 0, 30, 60]
 ListOfNeighborsMovesCost = [1, 1, 1, 1, 1]
 
+# Input Function to obtain start node x,y coordinates and angle of orientation
+def getStartNodeCoordinates():
+	x_start = int(input("Enter start node x coordinate : "))
+	y_start = int(input("Enter start node y coordinate : "))
+	theta_start = int(input("Enter start node orientation angle (-60,-30,0,30,60): "))
+	return (x_start, y_start, theta_start)
+
+# Input Function to obtain goal node x,y coordinates
+def getGoalNodeCoordinates():
+	x_goal = int(input("Enter goal node x coordinate : "))
+	y_goal = int(input("Enter goal node y coordinate : "))
+	return (x_goal, y_goal)
+	
 def euclidean_dist(n_node, g_node):
 	distX = g_node[0] - n_node[0]
 	distY = g_node[1] - n_node[1]
