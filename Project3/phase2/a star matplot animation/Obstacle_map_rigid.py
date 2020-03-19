@@ -3,7 +3,7 @@ import math
 import matplotlib.pyplot as plt
 
 def cart2img(ix):
-    return [ix[0],200-ix[1]]
+    return [ix[0], ix[1]]
 
 def point_robot_obstacle_space(x, y):
     obstacle = False
@@ -46,7 +46,9 @@ def obs():
 
 def main():
     a = obs()
+    figure, ax = plt.subplots()
     plt.imshow(a)
+    ax.set_ylim(bottom=0, top=200)
     plt.show()
 
 if __name__=="__main__":
