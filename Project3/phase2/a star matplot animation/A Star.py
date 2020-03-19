@@ -18,7 +18,7 @@ class Astar:
         self.min_y = 0
         self.max_x = max_x
         self.max_y = max_y
-        self.grid_size = 4
+        self.grid_size = 4 #resolution
         self.x_width = 300/self.grid_size
         self.y_width = 200/self.grid_size
         self.obstacle_map = None
