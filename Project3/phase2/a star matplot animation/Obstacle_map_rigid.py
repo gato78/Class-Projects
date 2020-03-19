@@ -49,6 +49,7 @@ def main():
     figure, ax = plt.subplots()
     plt.imshow(a)
     ax.set_ylim(bottom=0, top=200)
+    ax.set_xlim(left=0, right=300)
     plt.show()
 
 if __name__=="__main__":
