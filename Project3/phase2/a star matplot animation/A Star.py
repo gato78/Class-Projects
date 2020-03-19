@@ -8,9 +8,8 @@ from time import process_time
 import numpy as np
 import matplotlib.pyplot as plt
 
-max_y = 200
 max_x = 300
-
+max_y = 200
 ################################################################
 class Astar:
     def __init__(self, ox, oy, radius, clearance):
@@ -75,6 +74,8 @@ class Astar:
                 current = empty_set[curr_node]
                 plt.plot(self.calc_position(current.x, self.min_x),
                          self.calc_position(current.y, self.min_y), ".y")
+
+
                 if len(visited_set.keys()) % 5 == 0:      # control the speed of animation by pauses
                     plt.pause(0.0001)
 
@@ -111,7 +112,6 @@ class Astar:
         print("Time to completion:", (end-start))
 
         rx, ry = self.calc_final_path(goal_node, visited_set)
-
         return rx, ry
 
     def calc_final_path(self, goal_node, visited_set):  #Generate path
@@ -122,7 +122,9 @@ class Astar:
             rx.append(self.calc_position(n.x, self.min_x))
             ry.append(self.calc_position(n.y, self.min_y))
             parent = n.parent
+        # print(rx, ry)
         return rx, ry
+
 
     @staticmethod
     def calc_heuristic(n1, n2): #A star cost to go
@@ -136,8 +138,10 @@ class Astar:
     def calc_xy_index(self, position, minp):
         return round((position - minp) / self.grid_size)
 
+#################################################
     def calc_index(self, node):
-        return (node.y - self.min_y) * self.x_width + (node.x - self.min_x)
+        return (node.x - self.min_x) * self.x_width + (node.y - self.min_y)
+###############################
 
     def verify_node(self, node):   #check the model for obstacles
         px = self.calc_position(node.x, self.min_x)
@@ -157,7 +161,7 @@ class Astar:
             return True
 
     def calc_obstacle_map(self, ox, oy): #check if the node is inside of the obstacles
-        self.obstacle_map = [[False for j in range(0, int(self.y_width))]
+        self.obstacle_map = [[False for i in range(0, int(self.y_width))]
                              for j in range(0, int(self.x_width))]
         for ix in range(0, int(self.x_width)):
             x = self.calc_position(ix, self.min_x)
@@ -184,34 +188,36 @@ class Astar:
 
 def main():
     # set obstacle positions
-    ox, oy = [], []
+    # ox, oy = [], []
     map = Obstacle_map_rigid.obs()
+    map = np.transpose(map)
     [ox, oy] = np.where(map == 1)
-    X = np.array([ox, oy])
-    X = np.array([[0, 1], [-1, 0]]).dot(X)  #Rotate 90 degree
-    [ox, oy] = X
-    oy = oy + max_y
 
-    # start and goal position and radius and clearance
-    while 1:
-        sx = int(input("Enter the starting point x(Min allowed = 0): \n"))
-        sy = int(input("Enter the starting point y(Min allowed = 0): \n"))
-        gx = int(input("Enter the goal point x(Max allowed = 300): \n"))
-        gy = int(input("Enter the goal point y(Max allowed = 200): \n"))
-        if sx >300 or sx < 0:
-            print("Start node invalid")
-            continue
-        if sy >200 or sy < 0:
-            print("Goal node invalid")
-            continue
-        # if map[sy, sx] == 1:
-        #     print("The start point can not be inside the obstacle")
-        #     continue
-        if map[gy, gx] == 1:
-            print("The goal point can not be inside the obstacle")
-            continue
-        else:
-            break
+    # # start and goal position and radius and clearance
+    # while 1:
+    #     sx = int(input("Enter the starting point x(Min allowed = 0): \n"))
+    #     sy = int(input("Enter the starting point y(Min allowed = 0): \n"))
+    #     gx = int(input("Enter the goal point x(Max allowed = 300): \n"))
+    #     gy = int(input("Enter the goal point y(Max allowed = 200): \n"))
+    #     if sx > 300 or sx < 0:
+    #         print("Start node invalid")
+    #         continue
+    #     if sy > 200 or sy < 0:
+    #         print("Goal node invalid")
+    #         continue
+    #     if map[sy, sx] == 1:
+    #         print("The start point can not be inside the obstacle")
+    #         continue
+    #     if map[gy, gx] == 1:
+    #         print("The goal point can not be inside the obstacle")
+    #         continue
+    #     else:
+    #         break
+
+    sx = 50
+    sy = 30
+    gx = 150
+    gy = 150
     radius = 1
     clearance = 0
 
@@ -223,10 +229,13 @@ def main():
         plt.grid(False)
         plt.axis("equal")
 
+
     astar = Astar(ox, oy, radius, clearance)
     rx, ry = astar.planning(sx, sy, gx, gy)
 
     if show_animation:  # pragma: no cover
+
+
         plt.plot(rx, ry, "-r")
         plt.show()
 

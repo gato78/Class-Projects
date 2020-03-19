@@ -42,6 +42,7 @@ def obs():
             idx = cart2img([i,j])
             if point_robot_obstacle_space(idx[0],idx[1]) == True:
                 a[j,i]=1
+    # a= np.transpose(a)
     return np.asarray(a)
 
 def main():
