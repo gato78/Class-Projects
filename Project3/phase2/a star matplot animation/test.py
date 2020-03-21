@@ -249,7 +249,6 @@ def backtrackingStartGoalPath(start, goal, explored_path):
 
 
 start_node= (curr_x, curr_y)
-
 goal_node = (150,150)
 clearance = 1
 radius =1
