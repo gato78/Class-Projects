@@ -2,33 +2,34 @@ import math
 import math as m
 import heapq as hpq
 
-#######################################################################################
-############# Adding Test Code for Input Node with angle #############################
+# def get_prev_theta():
+#     start_theta = 60
+#     prev_theta = 0
+#     prev_theta= start_theta + prev_theta
 
 prev_theta = 0
 rad = m.pi / 180
-curr_x = 0
-curr_y = 0
+curr_x = 50
+curr_y = 30
 step = 1
-angleList = [-60 * rad, -30 * rad, 0.0, 30 * rad, 60 * rad]
+angleList = [-30 , -60, 0, 30, 60]
 
 
 def generateNeighborNodes(prev_theta, ang_list, step, curr_pos_x0, curr_pos_y0):
     neighborsList = []
     ang_list = ang_list
     for thet in ang_list:
-        rotatedX = round((m.cos(thet) * m.cos(prev_theta * m.pi / 180) * step - m.sin(thet) * m.sin(
-            prev_theta * m.pi / 180) * step + curr_pos_x0), 3)
-        rotatedY = round((m.sin(thet) * m.cos(prev_theta * m.pi / 180) * step + m.cos(thet) * m.sin(
-            prev_theta * m.pi / 180) * step + curr_pos_y0), 3)
-        neighborsList.append([rotatedX, rotatedY])
+        rotatedX = round((m.cos(thet*rad) * m.cos(prev_theta * rad) * step - m.sin(thet*rad) * m.sin(
+            prev_theta * rad) * step + curr_pos_x0), 3)
+        rotatedY = round((m.sin(thet*rad) * m.cos(prev_theta *rad) * step + m.cos(thet*rad) * m.sin(
+            prev_theta *rad) * step + curr_pos_y0), 3)
+        neighborsList.append([rotatedX, rotatedY, thet])
     return neighborsList
 
 
 neighbors = generateNeighborNodes(prev_theta, angleList, step, curr_x, curr_y)
 
-
-# print("neighbors list = ", neighbors)
+print("neighbors list = ", neighbors)
 
 
 # Output : neighbors list =  [[0.5, -0.866], [0.866, -0.5], [1.0, 0.0], [0.866, 0.5], [0.5, 0.866]]
@@ -46,61 +47,9 @@ neighbors_rounded = roundToNearestPoint5(neighbors)
 ########################################################################################
 
 # Lists containing possible node moves and their respective costs
-ListOfNeighborsMoves = [-60, -30, 0, 30, 60]
+
+ListOfNeighborsMoves = neighbors
 ListOfNeighborsMovesCost = [1, 1, 1, 1, 1]
-
-
-# Input Function to obtain start node x,y coordinates and angle of orientation
-def get_user_input_():
-    rigid = True
-    inputStartFlag = True
-    inputGoalFlag = True
-
-    while rigid:
-        radius = int(input("Enter Robot Radius value : "))
-        clearance = int(input("Enter Clearance value : "))
-        break
-
-    while inputStartFlag:
-        print("Please enter Start-Node (x,y) Coordinates")
-        start_x = int(input("Enter x coordinate value : "))
-        start_y = int(input("Enter y coordinate value : "))
-        theta_start = int(input("Enter start node orientation angle (-60,-30,0,30,60): "))
-        if start_x >= 0 and start_x <= 300 and start_y >= 0 and start_y <= 200:
-            if rigid_robot_obstacle_space(start_x, start_y, theta_start, clearance, radius) is not True:
-                start_node = (start_x, start_y)
-                inputStartFlag = False
-            else:
-                print("Goal Node coordinates are inside the obstacles boundaries...")
-                print("Please try again!!")
-        else:
-            print("Start Node input coordinates are outside of map boundaries ...")
-            print("Please try again!!")
-
-    while inputGoalFlag:
-        print("Please enter Goal-Node (x,y) Coordinates")
-        goal_x = int(input("Enter x coordinate value : "))
-        goal_y = int(input("Enter y coordinate value : "))
-        if goal_x >= 0 and goal_x <= 300 and goal_y >= 0 and goal_y <= 200:
-            if rigid_robot_obstacle_space(goal_x, goal_y,theta_start,clearance, radius) is not True:
-                goal_node = (goal_x, goal_y)
-                inputGoalFlag = False
-            else:
-                print("Goal Node coordinates are inside the obstacles boundaries...")
-                print("Please try again!!")
-        else:
-            print("Goal Node input coordinates are outside of map boundaries ...")
-            print("Please try again!!")
-
-    print("Running Astar Algorithm Simulation...")
-    return start_node, goal_node, theta_start, radius, clearance
-
-
-def euclidean_dist(n_node, g_node):
-    distX = g_node[0] - n_node[0]
-    distY = g_node[1] - n_node[1]
-    euclDist = m.sqrt((distX) ** 2 + (distY) ** 2)
-    return euclDist
 
 
 # Priority Queue List
@@ -121,16 +70,73 @@ def getNode(point_Node):
     node = node_removed[2]
     return node, node_cost  # total_cost,
 
+# def getAngle(point_Node):
+#     node_removed = hpq.heappop(point_Node.Node_State_i)
+#     node_cost = node_removed[1]
+#     node = node_removed[2]
+#     return node, node_cost  # total_cost,
+# Input Function to obtain start node x,y coordinates and angle of orientation
+# def get_user_input_():
+#     rigid = True
+#     inputStartFlag = True
+#     inputGoalFlag = True
+#
+#     while rigid:
+#         radius = int(input("Enter Robot Radius value : "))
+#         clearance = int(input("Enter Clearance value : "))
+#         break
+#
+#     while inputStartFlag:
+#         print("Please enter Start-Node (x,y) Coordinates")
+#         start_x = int(input("Enter x coordinate value : "))
+#         start_y = int(input("Enter y coordinate value : "))
+#         theta_start = int(input("Enter start node orientation angle (-60,-30,0,30,60): "))
+#         if start_x >= 0 and start_x <= 300 and start_y >= 0 and start_y <= 200:
+#             if rigid_robot_obstacle_space(start_x, start_y, theta_start, clearance, radius) is not True:
+#                 start_node = (start_x, start_y)
+#                 inputStartFlag = False
+#             else:
+#                 print("Goal Node coordinates are inside the obstacles boundaries...")
+#                 print("Please try again!!")
+#         else:
+#             print("Start Node input coordinates are outside of map boundaries ...")
+#             print("Please try again!!")
+#
+#     while inputGoalFlag:
+#         print("Please enter Goal-Node (x,y) Coordinates")
+#         goal_x = int(input("Enter x coordinate value : "))
+#         goal_y = int(input("Enter y coordinate value : "))
+#         if goal_x >= 0 and goal_x <= 300 and goal_y >= 0 and goal_y <= 200:
+#             if rigid_robot_obstacle_space(goal_x, goal_y,theta_start,clearance, radius) is not True:
+#                 goal_node = (goal_x, goal_y)
+#                 inputGoalFlag = False
+#             else:
+#                 print("Goal Node coordinates are inside the obstacles boundaries...")
+#                 print("Please try again!!")
+#         else:
+#             print("Goal Node input coordinates are outside of map boundaries ...")
+#             print("Please try again!!")
+#
+#     print("Running Astar Algorithm Simulation...")
+#     return start_node, goal_node, theta_start, radius, clearance
 
-# Get Cost from Current Node to Next Node
+
+# Get Cost from Current Node to Next Node : cost to come
 def getCost(current_node_cost, new_node_move):
-    index = ListOfNeighborsMoves.index(new_node_move)
+    index = ListOfNeighborsMoves.index(new_node_move) ##
     new_node_cost = current_node_cost + ListOfNeighborsMovesCost[index]
     return new_node_cost
 
+# def getAngle(current_node_cost, new_node_move):
+
+def euclidean_dist(n_node, g_node):
+    distX = g_node[0] - n_node[0]
+    distY = g_node[1] - n_node[1]
+    euclDist = m.sqrt((distX) ** 2 + (distY) ** 2)
+    return euclDist
 
 # Defining Obstacle Space using Half Plane Equations while also adding obstacle clearance and robot radius
-def rigid_robot_obstacle_space(x, y, theta_start,clearance, radius):
+def rigid_robot_obstacle_space(x, y,  clearance, radius):
     obstacle = False
     offset_dist = clearance + radius
     rhomboid_slope = 3 / 5
@@ -194,20 +200,20 @@ def generate_list_of_obstacle_nodes():
     obstacle_nodes = []
     for x in range(0, 301):
         for y in range(0, 201):
-            if rigid_robot_obstacle_space(x, y,theta_start, clearance, radius):
+            if rigid_robot_obstacle_space(x, y,clearance, radius):
                 obstacle_nodes.append([x, y])
     return obstacle_nodes
 
 
 # Implementing Algorithm
-def applyingDijkstraAlgorithm(start_node, goal_node):
+def applyingAstarAlgorithm(start_node, goal_node):
     exploredNodesPath = {}  # Contains list of explored nodes
     exploredNodesCost = {}  # Contains list of explored nodes cost
     exploredNodesPath[start_node] = 0
     exploredNodesCost[start_node] = 0
     ListOfNodes = PointNode()
     addNewNode(ListOfNodes, 0, 0, start_node)
-    while len(ListOfNodes.Node_State_i) > 0:
+    while len(ListOfNodes.Node_State_i) > 0: #is not empty set
         currNode, currNodeCost = getNode(ListOfNodes)  # currNodeTotCost,
         if currNode == goal_node:
             break
@@ -217,7 +223,7 @@ def applyingDijkstraAlgorithm(start_node, goal_node):
                 continue
             if newNode[0] > 300 or newNode[1] > 200:
                 continue
-            if rigid_robot_obstacle_space(newNode[0], newNode[1]) == True:
+            if rigid_robot_obstacle_space(newNode[0], newNode[1], clearance,radius) == True:
                 continue
             newNodeCost = round(getCost(currNodeCost, newNodeMove), 3)
             if newNode not in exploredNodesCost or newNodeCost < exploredNodesCost[newNode]:
@@ -226,6 +232,7 @@ def applyingDijkstraAlgorithm(start_node, goal_node):
                 exploredNodesCost[newNode] = newNodeCost  # newNodeCost
                 addNewNode(ListOfNodes, totalNewNodeCost, newNodeCost, newNode)
                 exploredNodesPath[newNode] = currNode
+    print()
     return exploredNodesPath
 
 
@@ -238,12 +245,16 @@ def backtrackingStartGoalPath(start, goal, explored_path):
         pathlist.append(explored_path[goalpath])
         goalpath = explored_path[goalpath]
     pathlist.reverse()
-    print(pathlist)
     return pathlist
 
 
-start_node, goal_node,theta_start, clearance, radius = get_user_input_()  # Gets user input and formats it for algorithm processing
+start_node= (curr_x, curr_y)
+
+goal_node = (150,150)
+clearance = 1
+radius =1
+# start_node, goal_node,theta_start, clearance, radius = get_user_input_()  # Gets user input and formats it for algorithm processing
 obstacles_list = generate_list_of_obstacle_nodes()  # Create list of obstacle nodes
-visited_nodes = applyingDijkstraAlgorithm(start_node, goal_node)  # Applying Djikstra Algorithm
-djikstra_path = backtrackingStartGoalPath(start_node, goal_node,
-                                          visited_nodes)  # Extract Shortest path from visited nodes list
+visited_nodes = applyingAstarAlgorithm(start_node, goal_node)  # Applying astar Algorithm
+astar_path = backtrackingStartGoalPath(start_node, goal_node, visited_nodes) # Extract Shortest path from visited nodes list
+print(astar_path)
