@@ -174,4 +174,36 @@ def backtrackingStartGoalPath(start,goal,explored_path):
 		goalpath = explored_path[goalpath]
 	pathlist.reverse()
 	return pathlist
+	
+def draw_obs_map():
+	map = []
+	for x in range(0,299):
+		for y in range(0,199):
+			if point_robot_obstacle_space(x,y)  == True:
+				map.append((x,y))
+	return map
+	
+fig = plt.figure(figsize=(10,5))
+ax = fig.subplots()
+ax.set_xlim(0, 300)
+ax.set_ylim(0, 200)
+ax.set_xticks(np.arange(0, 301, 50))
+ax.set_xticks(np.arange(0, 301, 10), minor=True)
+ax.set_yticks(np.arange(0, 201, 50))
+ax.set_yticks(np.arange(0, 201, 10), minor=True)
+ax.grid(which='minor', alpha=0.2)
+ax.grid(which='major', alpha=0.5)
+ax.set_aspect('equal')
+plt.xlabel('x axis')
+plt.ylabel('y axis')
+plt.title("A STAR -RIGID ROBOT MAP")
+graph1, = ax.plot([], [],'ys')
+graph1.set_markersize(0.7)
+graph2, = ax.plot([], [],'ks')
+graph2.set_markersize(1.5)
 
+obs_map = draw_obs_map()
+
+for obs in obs_map:
+	rect = plt.Rectangle((obs[0],obs[1]),1,1,color='b', fill=True, linewidth=None)
+	plt.gca().add_patch(rect)
