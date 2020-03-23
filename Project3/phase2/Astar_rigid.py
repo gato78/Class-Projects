@@ -33,7 +33,6 @@ def inputIntegerNumber(msg):
        return usrInput 
        break 
 
-
 # Function to get input start and goal node coordinates along with other parameters
 def get_input_coordinates():
 
@@ -84,10 +83,41 @@ def get_input_coordinates():
 	
 	return start_node, goal_node, c, r ,stepSizeSz
 
+def visited_nodes_duplicate():
+	visited_node_duplicate = {}
+	for x in np.arange(0,300.5,0.5):
+		for y in np.arange(0,200.5,0.5):
+			for theta in range(-60,61,30):
+				visited_node_duplicate[(x,y,theta)]=0
+	return visited_node_duplicate
+
+def exploredNodesCost_discrete():
+	explrdNdCost_discrete = {}
+	for x in np.arange(0,300.5,0.5):
+		for y in np.arange(0,200.5,0.5):
+			for theta in range(-60,61,30):
+				explrdNdCost_discrete[(x,y,theta)]=0
+	return explrdNdCost_discrete
+
+def is_node_duplicate(curr_nd,vis_nd_dupl):
+	duplicate = False
+	if curr_nd in vis_nd_dupl:
+		if vis_nd_dupl[curr_nd] == 1:
+			#print("duplicate node!!",curr_nd)
+			duplicate = True
+		else:
+			#print("new node = ",curr_nd)
+			vis_nd_dupl[curr_nd] = 1
+	return duplicate
+
+def roundToNearestPoint5(node):
+	rnd_node = (round(node[0]*2)/2,round(node[1]*2)/2,node[2])
+	return rnd_node
+
 def euclidean_dist(n_node, g_node):
 	distX = g_node[0] - n_node[0]
 	distY = g_node[1] - n_node[1]
-	euclDist = math.sqrt((distX)**2 + (distY)**2)
+	euclDist = m.sqrt((distX)**2 + (distY)**2)
 	return euclDist
 
 #Priority Queue List	
