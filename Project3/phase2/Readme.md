@@ -37,7 +37,7 @@ The implementation code is done using Python 3.
 <image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/optimal%20path.gif " width="640" height="480" ></image>
 
 ## Where to change goal_radius parameter (Astar_rigid.py):
-<image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Main%execution%20.JPEG " width="640" height="480" ></image>
+<image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Main%20execution%20.JPEG " width="640" height="480" ></image>
 
 ## Astar_rigid.py EXECUTION TIME :
 <p>To execute the algorithm takes about 30 seconds
