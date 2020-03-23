@@ -44,14 +44,20 @@ The implementation code is done using Python 3.
 <p>In total for complete execution = 4 mins + 30 sec = 4.5 minutes.
 
 ## Function Descriptions:
-<li>function :</li>
-<li>function :</li>
-<li>function :</li>
-<li>function :</li>
-<li>function :</li>
-<li>function :</li>
-<li>function :</li>
-<li>function :</li>
-<li>function :</li>
-<li>function :</li>
-<li>function : 
+<li>function generateNeighborNodes:</li>
+<li>function inputIntegerNumber:</li>
+<li>function get_input_coordinates:</li>
+<li>function visited_nodes_duplicate:</li>
+<li>function exploredNodesCost_discrete:</li>
+<li>function is_node_duplicate:</li>
+<li>function roundToNearestPoint5:</li>
+<li>function euclidean_dist:</li>
+<li>function addNewNode:</li>
+<li>function getNode:</li>
+<li>function getCost:</li>
+<li>function rigid_robot_obstacle_space:</li>
+<li>function applyingAstarAlgorithm:</li>
+<li>function backtrackingStartGoalPath:</li>
+<li>function plot_lines:</li>
+<li>function bufImage:</li>
+<li>function showSimulation:</li>
