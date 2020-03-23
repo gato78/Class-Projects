@@ -21,19 +21,69 @@ def generateNeighborNodes(prev_theta,ang_list,step, curr_pos_x0,curr_pos_y0):
 		neighbors.append((rotatedX,rotatedY,round((newTheta))))
 	return neighbors
 
-# Input Function to obtain start node x,y coordinates and angle of orientation
-def getStartNodeCoordinates():
-	x_start = int(input("Enter start node x coordinate : "))
-	y_start = int(input("Enter start node y coordinate : "))
-	theta_start = int(input("Enter start node orientation angle (-60,-30,0,30,60): "))
-	return (x_start, y_start, theta_start)
+# Custom input function to verify inputs are integer numbers
+def inputIntegerNumber(msg):
+  while True:
+    try:
+       usrInput = int(input(msg))       
+    except ValueError:
+       print("Value must be an integer! Please try again!")
+       continue
+    else:
+       return usrInput 
+       break 
 
-# Input Function to obtain goal node x,y coordinates
-def getGoalNodeCoordinates():
-	x_goal = int(input("Enter goal node x coordinate : "))
-	y_goal = int(input("Enter goal node y coordinate : "))
-	return (x_goal, y_goal)
+
+# Function to get input start and goal node coordinates along with other parameters
+def get_input_coordinates():
+
+	inputStartFlag = True
+	inputGoalFlag = True
+
+	print("===========================================")
+	print("Rigid Robot - A star Algorithm Program ")
+	print("===========================================")
+
+	print("Rigid Robot Map Obstacles Clearance (c) and Robot Radius (r)")
+	c = inputIntegerNumber("Please enter obstacle clearance (c) : ")
+	r = inputIntegerNumber("Please enter robot radius (r) : ")
+	stepSizeSz = inputIntegerNumber("Please enter stepSize Size (from 1 to 10) : ")
 	
+	while inputStartFlag:
+		print("Please enter Start-Node (x,y) Coordinates")
+		start_x = inputIntegerNumber(" Enter x coordinate value : ")
+		start_y = inputIntegerNumber(" Enter y coordinate value : ")
+		start_theta = inputIntegerNumber("Enter start node theta angle (choices: -60 -30 0 30 60) = ")
+		if start_x <0 or start_x > 300 or start_y < 0 or start_y > 200:
+			print("Start Node input coordinates are outside of map boundaries ...")
+			print("Please try again!!")
+			continue
+		if rigid_robot_obstacle_space(start_x, start_y, c, r):
+			print("Start Node coordinates are inside the obstacles boundaries...")
+			print("Please try again!!")
+		else:
+			start_node = (start_x,start_y,start_theta)
+			inputStartFlag = False
+	
+	while inputGoalFlag:
+		print("Please enter Goal-Node (x,y) Coordinates")
+		goal_x = inputIntegerNumber(" Enter x coordinate value : ")
+		goal_y = inputIntegerNumber(" Enter y coordinate value : ")
+		if goal_x <0 or goal_x > 300 or goal_y < 0 or goal_y > 200:
+			print("Goal Node input coordinates are outside of map boundaries ...")
+			print("Please try again!!")
+			continue
+		if rigid_robot_obstacle_space(goal_x, goal_y, c, r):
+			print("Goal Node coordinates are inside the obstacles boundaries...")
+			print("Please try again!!")
+		else:
+			goal_node = (goal_x,goal_y,0)
+			inputGoalFlag = False
+
+	print("Running A star Algorithm Simulation...")
+	
+	return start_node, goal_node, c, r ,stepSizeSz
+
 def euclidean_dist(n_node, g_node):
 	distX = g_node[0] - n_node[0]
 	distY = g_node[1] - n_node[1]
