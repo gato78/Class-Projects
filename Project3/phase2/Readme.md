@@ -41,20 +41,20 @@ The implementation code is done using Python 3.
 <p>In total for complete execution = 4 mins + 30 sec = 4.5 minutes.
 
 ## Function Descriptions:
-<li>function generateNeighborNodes:</li>
-<li>function inputIntegerNumber:</li>
-<li>function get_input_coordinates:</li>
-<li>function visited_nodes_duplicate:</li>
-<li>function exploredNodesCost_discrete:</li>
-<li>function is_node_duplicate:</li>
-<li>function roundToNearestPoint5:</li>
-<li>function euclidean_dist:</li>
-<li>function addNewNode:</li>
-<li>function getNode:</li>
-<li>function getCost:</li>
-<li>function rigid_robot_obstacle_space:</li>
-<li>function applyingAstarAlgorithm:</li>
-<li>function backtrackingStartGoalPath:</li>
-<li>function plot_lines:</li>
-<li>function bufImage:</li>
-<li>function showSimulation:</li>
+<li>function generateNeighborNodes: Function that generates neighbors from current node</li>
+<li>function inputIntegerNumber: utility function to check for integer number</li>
+<li>function get_input_coordinates: obtains input start and goal nodes from user along other parameteres needed for the simulation</li>
+<li>function visited_nodes_duplicate: discrete matrix created to test for nodes duplicates</li>
+<li>function exploredNodesCost_discrete: discrete matrix created to store cost of discrete version of nodes</li>
+<li>function is_node_duplicate: function to test if nodes are duplicated in visited nodes</li>
+<li>function roundToNearestPoint5: function that rounds to either whole number or 0.5 increments</li>
+<li>function euclidean_dist: measures distance between current node and goal node</li>
+<li>function addNewNode: adds a new node to priority queue</li>
+<li>function getNode: gets a node from a priority queu</li>
+<li>function getCost: gets cost of current node to next node</li>
+<li>function rigid_robot_obstacle_space: checks if node is in obstacle space</li>
+<li>function applyingAstarAlgorithm: Algorithm to obtain optimal path between start node and goal node</li>
+<li>function backtrackingStartGoalPath: obating optimal path from visited nodes provided by A start alorithm</li>
+<li>function plot_lines: creates lines between 2 nodes</li>
+<li>function bufImage: buffers image of simulation</li>
+<li>function showSimulation: executes simulation of A star algorithm</li>
