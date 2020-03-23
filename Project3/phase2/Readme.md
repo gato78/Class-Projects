@@ -29,7 +29,7 @@ The implementation code is done using Python 3.
 <image src=" " width="640" height="480" ></image>
 
 ## Simulation part 3 ( Astar Algorithm showing shortest path between start and goal nodes )
-<image src=" " width="640" height="480" ></image>
+<image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/optimal%20path.gif " width="640" height="480" ></image>
 
 ## Simulation part 4 ( Video showing simulation )
 
