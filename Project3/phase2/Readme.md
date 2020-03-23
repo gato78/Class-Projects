@@ -24,7 +24,7 @@ The implementation code is done using Python 3.
   <p>Open console terminal and run command below:
     <p>python Astar_rigid.py
   <p>Program should then start and ask the user to input start node coordinates and angle, goal node coordinates, obstacles clearance, robot radius and step(distance to move).
-  <p>Program will then execute and once data results are obtained it will displayed them as a matplotlib/opencv animation 
+  <p>Program will then execute and once data results are obtained it will displayed them as a matplotlib/opencv animation. Animation will last about 4 minutes and once final optimal path is shown, window will remain active for an extra 5 seconds before closing down and exiting the program. The simulation can also be aborted by pressing CTRL-C in the console screen (not on the matplotlib window). 
 <p>IMPORTANT : The simulation is mostly console terminal driven and the only parameter that can not be changed from the console terminal is the goal_radius. To change this parameter please open the Astar_rigid.py and scroll down to line 292 and change the parameter as desired.
   
 ## Simulation part 1 ( User inputs to program )
