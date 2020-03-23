@@ -1,6 +1,25 @@
-import math
+import math as m
 import heapq as hpq
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.collections import PatchCollection
+import matplotlib.patches
+import cv2
+from ObstacleMap import ObsMap
 
+def generateNeighborNodes(prev_theta,ang_list,step, curr_pos_x0,curr_pos_y0):
+	neighbors = []
+	ang_list = ang_list
+	for thet in ang_list:
+		rotatedX = (m.cos(thet) * m.cos(prev_theta*m.pi/180)*step - m.sin(thet) * m.sin(prev_theta*m.pi/180)*step + curr_pos_x0)
+		rotatedY = (m.sin(thet) * m.cos(prev_theta*m.pi/180)*step + m.cos(thet) * m.sin(prev_theta*m.pi/180)*step + curr_pos_y0)
+		newTheta = prev_theta + thet/rad
+		if newTheta >= 360:
+			newTheta = (newTheta - 360)
+		if newTheta <= -360:
+			newTheta = (newTheta + 360)
+		neighbors.append((rotatedX,rotatedY,round((newTheta))))
+	return neighbors
 
 # Input Function to obtain start node x,y coordinates and angle of orientation
 def getStartNodeCoordinates():
