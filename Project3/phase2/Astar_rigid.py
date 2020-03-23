@@ -181,47 +181,60 @@ def rigid_robot_obstacle_space(x,y,clearance,radius):
 		
     return obstacle	
 
-# Goal space threshold set to 1.5 unit radius 
-def rigid_robot_goal_space(x,y,goal_x,goal_y,radius = 1.5):
-	goal = False
-	if ((x - math.ceil(goal_x))**2 + math.ceil(y - (goal_y))**2 - math.ceil(radius)**2) <= 0:   # circle
-		goal = True
-	return goal
-
-# Implementing Djikstra's Algorithm
-def applyingDijkstraAlgorithm(start_node, goal_node):
-	exploredNodesPath = {}                 # Contains list of explored nodes
-	exploredNodesCost = {}                 # Contains list of explored nodes cost
+# Implementing A-star Algorithm
+def applyingAstarAlgorithm(start_node, goal_nd, goal_radius, visited_duplicate,clearance,radius, stepSize):
+	curr_theta = 0
+	moveCost = stepSize
+	angleList = [60*rad, 30*rad, 0.0, -30*rad, -60*rad]
+	visitedListChildPar = []
+	node_goal_thd = (0,0,0)
+	exploredNodesPath = {}                 			  # Contains list of explored nodes
+	exploredNodesCost = exploredNodesCost_discrete()  # Contains list of explored nodes cost
 	exploredNodesPath[start_node] = 0
 	exploredNodesCost[start_node] = 0
+	visited_duplicate[start_node] = 1
 	ListOfNodes = PointNode()
 	addNewNode(ListOfNodes,0,0,start_node)
-	while len(ListOfNodes.Node_State_i) > 0:
+	while len(ListOfNodes.Node_State_i) > 0: 
+		neighbors_list = []
 		currNode, currNodeCost= getNode(ListOfNodes)   #  currNodeTotCost,
-		if currNode == goal_node:
+		rnd_curNode = roundToNearestPoint5(currNode)
+		rnd_curCost = exploredNodesCost[rnd_curNode]
+		if euclidean_dist(currNode, goal_node) <= goal_radius:
+			node_goal_thd = currNode
+			ListOfNodes.Node_State_i.clear()
 			break
-		for newNodeMove in ListOfNeighborsMoves:
-			newNode = (currNode[0] + newNodeMove[0], currNode[1] + newNodeMove[1])
+		curr_x = currNode[0]
+		curr_y = currNode[1]
+		curr_theta = currNode[2]
+		neighbors_list = generateNeighborNodes(curr_theta, angleList, stepSize, curr_x, curr_y)
+		for newNode in neighbors_list:
+			rnd_newNode = roundToNearestPoint5(newNode)
+			newNodeCost = getCost(currNodeCost,moveCost)
+			rnd_newCost = rnd_curCost + moveCost
+			heuristic_dist = euclidean_dist(newNode, goal_node)
 			if newNode[0] < 0 or newNode[1] < 0 :     
 				continue
 			if newNode[0] > 300 or newNode[1] > 200 :
 				continue
-			if point_robot_obstacle_space(newNode[0],newNode[1]) == True :
+			if rigid_robot_obstacle_space(newNode[0],newNode[1],clearance,radius) == True :
 				continue
-			newNodeCost = round(getCost(currNodeCost,newNodeMove),3)
-			if newNode not in exploredNodesCost or newNodeCost < exploredNodesCost[newNode]:
-				heuristic_dist = euclidean_dist(newNode, goal_node)
-				totalNewNodeCost = round(currNodeCost + heuristic_dist,3)
-				exploredNodesCost[newNode] = newNodeCost   # newNodeCost
-				addNewNode(ListOfNodes,totalNewNodeCost,newNodeCost,newNode)
+			if is_node_duplicate(rnd_newNode,visited_duplicate) == False:
+				exploredNodesCost[rnd_newNode] = rnd_newCost
 				exploredNodesPath[newNode] = currNode
-	return exploredNodesPath
+				visitedListChildPar.append((currNode,newNode))
+				addNewNode(ListOfNodes,heuristic_dist,newNodeCost,newNode)
+			elif rnd_newCost < exploredNodesCost[rnd_newNode]:
+				exploredNodesCost[rnd_newNode] = rnd_newCost   
+				exploredNodesPath[newNode] = currNode
+				visitedListChildPar.append((currNode,newNode))
+	return exploredNodesPath, node_goal_thd, visitedListChildPar
 
 #Implementing backtracking algorithm between start node and goal node 
-def backtrackingStartGoalPath(start,goal,explored_path):
+def backtrackingStartGoalPath(start,goal_thd,explored_path):
 	pathlist = []
-	goalpath = goal
-	pathlist.append(goal)
+	goalpath = goal_thd
+	pathlist.append(goal_thd)
 	while goalpath != start:
 		pathlist.append(explored_path[goalpath])
 		goalpath = explored_path[goalpath]
