@@ -31,7 +31,7 @@ The implementation code is done using Python 3.
 <div align=center><image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Input%20from%20terminal%20.JPEG " width="640" height="480" ></image></div>
 
 ## Simulation part 2 ( Astar Algorithm visiting nodes in the map space )
-<div align=center><image src=" " width="640" height="480" ></image></div>
+<div align=center><image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Searching%20nodes.gif " width="640" height="480" ></image></div>
 
 ## Simulation part 3 ( Astar Algorithm showing shortest path between start and goal nodes )
 <div align=center><image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/optimal%20path.gif " width="640" height="480" ></image></div>
