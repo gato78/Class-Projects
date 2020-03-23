@@ -240,12 +240,45 @@ def backtrackingStartGoalPath(start,goal_thd,explored_path):
 		goalpath = explored_path[goalpath]
 	pathlist.reverse()
 	return pathlist
+
+def plot_lines(pt1,pt2,linecolor):
+	x1=pt1[0]
+	y1=pt1[1]
+	theta = pt1[2]
+	x2 = pt2[0]
+	y2 = pt2[1]
+	deltaX = x2 - x1
+	deltaY = y2 - y1
+	line = plt.Arrow(x1,y1, deltaX, deltaY, color=linecolor)
+	return line
+
+def bufImage():
+	Obs_space.fig.canvas.draw()
+	mapImg = np.frombuffer(Obs_space.fig.canvas.tostring_rgb(), dtype=np.uint8).reshape(Obs_space.fig.canvas.get_width_height()[::-1] + (3,))
+	mapImg = cv2.cvtColor(mapImg,cv2.COLOR_RGB2BGR)
+	return mapImg
 	
-def draw_obs_map():
-	map = []
-	for x in range(0,299):
-		for y in range(0,199):
-			if point_robot_obstacle_space(x,y)  == True:
-				map.append((x,y))
-	return map
+def showSimulation(path_chPr):
+	print("Displaying Simulation")
+	for node in path_chPr:
+		lineTr = plot_lines(node[0],node[1],'orange')
+		Obs_space.ax.add_artist(lineTr)
+		mapImg = bufImage()
+		if cv2.waitKey(1) == ord('q'):
+			exit()
+		cv2.imshow('A star', mapImg)
 	
+	AstarLen = len(AstarPath)-1
+	i = 0
+	while i < AstarLen:
+		lineTr = plot_lines(AstarPath[i],AstarPath[i+1],'black')
+		Obs_space.ax.add_artist(lineTr)
+		mapImg = bufImage()		
+		i = i+1
+		cv2.imshow('A star', mapImg)
+		if cv2.waitKey(1) == ord('q'):
+			exit()
+	cv2.imshow('A star', mapImg)
+	if cv2.waitKey(5000): # displays map with path for 5 seconds before closing it
+		exit()
+
