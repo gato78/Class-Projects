@@ -137,22 +137,20 @@ def getNode(point_Node):
 	return node, node_cost   # total_cost,
 
 #Get Cost from Current Node to Next Node
-def getCost(current_node_cost, new_node_move):
-	index = ListOfNeighborsMoves.index(new_node_move)
-	new_node_cost = current_node_cost + ListOfNeighborsMovesCost[index]
+def getCost(current_node_cost, move_cost):
+	new_node_cost = current_node_cost + move_cost
 	return new_node_cost
 
 # Defining Obstacle Space using Half Plane Equations while also adding obstacle clearance and robot radius
 def rigid_robot_obstacle_space(x,y,clearance,radius):
-
     obstacle = False
     offset_dist = clearance + radius
     rhomboid_slope = 3/5
-    rhomb_dist = offset_dist*math.sqrt(1 + rhomboid_slope**2)
+    rhomb_dist = offset_dist*m.sqrt(1 + rhomboid_slope**2)
     rect_slope1 = 37/65
     rect_slope2 = 9/5
-    rect1_dist = offset_dist*math.sqrt(1 + rect_slope1**2)
-    rect2_dist = offset_dist*math.sqrt(1 + rect_slope2**2)
+    rect1_dist = offset_dist*m.sqrt(1 + rect_slope1**2)
+    rect2_dist = offset_dist*m.sqrt(1 + rect_slope2**2)
     poly1_slope = 6/5
     poly2_slope = 1
     poly3_slope = 13
@@ -160,29 +158,24 @@ def rigid_robot_obstacle_space(x,y,clearance,radius):
     poly5_slope = 7/5
     poly6_slope = 6/5
     midline_slope = 7/5
-    poly1_dist = offset_dist*math.sqrt(1 + poly1_slope**2)
-    poly2_dist = offset_dist*math.sqrt(1 + poly2_slope**2)	
-    poly3_dist = offset_dist*math.sqrt(1 + poly3_slope**2)
-    poly4_dist = offset_dist*math.sqrt(1 + poly4_slope**2)
-    poly5_dist = offset_dist*math.sqrt(1 + poly5_slope**2)
-    poly6_dist = offset_dist*math.sqrt(1 + poly6_slope**2)
-    midline_dist = offset_dist*math.sqrt(1 + midline_slope**2)
+    poly1_dist = offset_dist*m.sqrt(1 + poly1_slope**2)
+    poly2_dist = offset_dist*m.sqrt(1 + poly2_slope**2)	
+    poly3_dist = offset_dist*m.sqrt(1 + poly3_slope**2)
+    poly4_dist = offset_dist*m.sqrt(1 + poly4_slope**2)
+    poly5_dist = offset_dist*m.sqrt(1 + poly5_slope**2)
+    poly6_dist = offset_dist*m.sqrt(1 + poly6_slope**2)
+    midline_dist = offset_dist*m.sqrt(1 + midline_slope**2)
 	
-    if ((x - math.ceil(225))**2 + math.ceil(y - (150))**2 - math.ceil(25 + offset_dist)**2) <= 0:   # circle
+    if ((x - m.ceil(225))**2 + m.ceil(y - (150))**2 - m.ceil(25 + offset_dist)**2) <= 0:   # circle
         obstacle = True
-		
-    if ((x - math.ceil(150))/math.ceil(40 + offset_dist))**2 + ((y - math.ceil(100))/math.ceil(20 + offset_dist))**2 - 1 <= 0:	# ellipse
+    if ((x - m.ceil(150))/m.ceil(40 + offset_dist))**2 + ((y - m.ceil(100))/m.ceil(20 + offset_dist))**2 - 1 <= 0:	# ellipse
         obstacle = True
-	
     if (5*y + 3*x - 725 + 5*rhomb_dist >= 0) and (5*y - 3*x + 475 - 5*rhomb_dist <= 0) and (5*y + 3*x - 875 - 5*rhomb_dist <= 0) and (5*y - 3*x + 625 + 5*rhomb_dist >= 0):   # rhomboid 
         obstacle = True
-		
     if (5*y + 6*x - 1050 + 5*poly1_dist >= 0) and (5*y - 6*x - 150 + 5*poly6_dist >= 0) and (5*y + 7*x - 1450 - 5*poly5_dist <= 0) and (y - 185 - 1*poly4_dist <= 0) and (x - 50 >= 0):    # right side of polygon   
         obstacle = True
-		
     if (y - x - 100 + 1*poly2_dist >= 0) and (5*y - 65*x + 700 - 5*poly3_dist <= 0) and (y - 185 - 1*poly4_dist <= 0) and (x - 50 <= 0):    # left side of polygon
         obstacle = True
-		
     if (65*y + 37*x - 5465 + 65*rect1_dist >= 0) and (5*y - 9*x - 65 - 5*rect2_dist <= 0) and (65*y + 37*x - 6235 - 65*rect1_dist <= 0) and (5*y - 9*x + 705 + 5*rect2_dist >= 0):  # rectangle rotated 30 degrees
         obstacle = True
 		
