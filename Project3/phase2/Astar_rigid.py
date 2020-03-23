@@ -1,45 +1,6 @@
-import pygame as pyg
 import math
 import heapq as hpq
 
-#######################################################################################
-############# Adding Test Code for Input Node with angle #############################
-
-prev_theta = 0
-rad = m.pi/180 
-curr_x = 0
-curr_y = 0
-step = 1
-angleList = [-60*rad, -30*rad, 0.0, 30*rad, 60*rad]
-
-def generateNeighborNodes(prev_theta,ang_list,step, curr_pos_x0,curr_pos_y0):
-    neighborsList = []
-    ang_list = ang_list
-    for thet in ang_list:
-        rotatedX = round((m.cos(thet) * m.cos(prev_theta*m.pi/180)*step - m.sin(thet) * m.sin(prev_theta*m.pi/180)*step + curr_pos_x0),3)
-        rotatedY = round((m.sin(thet) * m.cos(prev_theta*m.pi/180)*step + m.cos(thet) * m.sin(prev_theta*m.pi/180)*step + curr_pos_y0),3)
-        neighborsList.append([rotatedX,rotatedY])
-    return neighborsList
-
-neighbors = generateNeighborNodes(prev_theta,angleList,step, curr_x, curr_y)
-print("neighbors list = ",neighbors)
-
-# Output : neighbors list =  [[0.5, -0.866], [0.866, -0.5], [1.0, 0.0], [0.866, 0.5], [0.5, 0.866]]	
-
-def roundToNearestPoint5(nbh_list):
-    roundedList = [[round(x*2)/2 for x in y] for y in nbh_list]
-    return roundedList
-	
-neighbors_rounded = roundToNearestPoint5(neighbors)
-print(neighbors_rounded)
-
-# Output : [[0.5, -1.0], [1.0, -0.5], [1.0, 0.0], [1.0, 0.5], [0.5, 1.0]]
-
-########################################################################################
-	
-# Lists containing possible node moves and their respective costs
-ListOfNeighborsMoves = [-60, -30, 0, 30, 60]
-ListOfNeighborsMovesCost = [1, 1, 1, 1, 1]
 
 # Input Function to obtain start node x,y coordinates and angle of orientation
 def getStartNodeCoordinates():
@@ -183,27 +144,3 @@ def draw_obs_map():
 				map.append((x,y))
 	return map
 	
-fig = plt.figure(figsize=(10,5))
-ax = fig.subplots()
-ax.set_xlim(0, 300)
-ax.set_ylim(0, 200)
-ax.set_xticks(np.arange(0, 301, 50))
-ax.set_xticks(np.arange(0, 301, 10), minor=True)
-ax.set_yticks(np.arange(0, 201, 50))
-ax.set_yticks(np.arange(0, 201, 10), minor=True)
-ax.grid(which='minor', alpha=0.2)
-ax.grid(which='major', alpha=0.5)
-ax.set_aspect('equal')
-plt.xlabel('x axis')
-plt.ylabel('y axis')
-plt.title("A STAR -RIGID ROBOT MAP")
-graph1, = ax.plot([], [],'ys')
-graph1.set_markersize(0.7)
-graph2, = ax.plot([], [],'ks')
-graph2.set_markersize(1.5)
-
-obs_map = draw_obs_map()
-
-for obs in obs_map:
-	rect = plt.Rectangle((obs[0],obs[1]),1,1,color='b', fill=True, linewidth=None)
-	plt.gca().add_patch(rect)
