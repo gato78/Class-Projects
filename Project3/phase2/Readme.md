@@ -15,26 +15,25 @@ The implementation code is done using Python 3.
   <p> math
   <p> opencv
   <p> matplotlib  
-<p> How to run program:
+<p> How to run program :
   The project consists of 2 files:
-  Astar_rigid.py
-  ObstacleMap.py
-  Please make sure to have both files in the same folder before running simulation.
-  The main file is the Astar_rigid.py file. This file calls the ObstacleMap since this file contains the obstacles space.
-  The simulation is mostly console terminal driven and the only parameter that can not be changed from the console terminal is the goal_radius. To change this parameter please open the Astar_rigid.py and scroll down to line 292 and change the parameter as desired.
+  <li>Astar_rigid.py</li>
+  <li>ObstacleMap.py</li>
+  <p>Please make sure to have both files in the same folder before running simulation.
+  <p>The main file is the Astar_rigid.py file. This file calls the ObstacleMap since this file contains the obstacles space.
   <p>Open console terminal and run command below:
     <p>python Astar_rigid.py
   <p>Program should then start and ask the user to input start node coordinates and angle, goal node coordinates, obstacles clearance, robot radius and step(distance to move).
   <p>Program will then execute and once data results are obtained it will displayed them as a matplotlib/opencv animation 
-
+<p>IMPORTANT : The simulation is mostly console terminal driven and the only parameter that can not be changed from the console terminal is the goal_radius. To change this parameter please open the Astar_rigid.py and scroll down to line 292 and change the parameter as desired.
 ## Simulation part 1 ( User inputs to program )
-<div align=center><image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Input%20from%20terminal%20.JPEG " width="640" height="480" ></image></div>
+<image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Input%20from%20terminal%20.JPEG " width="640" height="480" ></image>
 
 ## Simulation part 2 ( Astar Algorithm visiting nodes in the map space )
-<div align=center><image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Searching%20nodes.gif " width="640" height="480" ></image></div>
+<image src=" " width="640" height="480" ></image>
 
 ## Simulation part 3 ( Astar Algorithm showing shortest path between start and goal nodes )
-<div align=center><image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/optimal%20path.gif " width="640" height="480" ></image></div>
+<image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/optimal%20path.gif " width="640" height="480" ></image>
 
 ## Simulation part 4 ( Video showing simulation )
 
