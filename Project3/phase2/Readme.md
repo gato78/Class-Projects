@@ -39,10 +39,9 @@ The implementation code is done using Python 3.
 ## Simulation part 4 ( Video showing simulation )
 
 ## Astar_rigid.py EXECUTION TIME :
-<p>To execute the algorithm takes about 26.4 seconds
-<p>Then the pygame simulation phase takes about 42.1 seconds.
-<p>However, the pygame simulation phase includes a delay of 8 seconds purposely added to allow time for the user to see the shortest path display. However, this can be adjusted as needed if a shorter simulation time is required.
-<p>In total for complete execution = 26.4 + 42.1 = 68.5 seconds
+<p>To execute the algorithm takes about 30 seconds
+<p>Then the matplotlib/opencv simulation phase takes about 4 mins.
+<p>In total for complete execution = 4 mins + 30 sec = 4.5 minutes.
 
 ## Function Descriptions:
 <li>function :</li>
