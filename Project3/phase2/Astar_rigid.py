@@ -282,3 +282,21 @@ def showSimulation(path_chPr):
 	if cv2.waitKey(5000): # displays map with path for 5 seconds before closing it
 		exit()
 
+
+##############################################################################
+#           Main Program Execution											 #
+##############################################################################
+
+if __name__ == '__main__':
+	rad = m.pi/180
+	goal_radius = 3							# Goal Radius set at 3 by default
+	start_node, goal_node, c, r, stepSize = get_input_coordinates()		# Gets user input and formats it for algorithm processing
+	vis_nd_duplicate = visited_nodes_duplicate()				# Generate Discrete visited nodes map to check for duplicate nodes
+	visited_nodes, goal_threshold,childParPath = applyingAstarAlgorithm(start_node, goal_node,goal_radius, vis_nd_duplicate,c,r, stepSize)	# Applying Djikstra Algorithm 
+	AstarPath = backtrackingStartGoalPath(start_node,goal_threshold,visited_nodes) 			# Extract Shortest path from visited nodes list
+	Obs_space = ObsMap()										# Creating an instance of the Obstacle Space Object 
+	goal_circ = plt.Circle((goal_node[0],goal_node[1]), radius=goal_radius, color='#00FFFF')	# Drawing a goal threshold area in the map
+	Obs_space.ax.add_patch(goal_circ)							# Adding drawing to map
+	showSimulation(childParPath)								# Executing A star Simulation
+	
+
