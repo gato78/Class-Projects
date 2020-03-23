@@ -25,7 +25,8 @@ The implementation code is done using Python 3.
     <p>python Astar_rigid.py
   <p>Program should then start and ask the user to input start node coordinates and angle, goal node coordinates, obstacles clearance, robot radius and step(distance to move).
   <p>Program will then execute and once data results are obtained it will displayed them as a matplotlib/opencv animation 
-<p>IMPORTANT : The simulation is mostly console terminal driven and the only parameter that can not be changed from the console terminal is the goal_radius. To change this parameter please open the Astar_rigid.py and scroll down to line 292 and change the parameter as desired.</p>
+<p>IMPORTANT : The simulation is mostly console terminal driven and the only parameter that can not be changed from the console terminal is the goal_radius. To change this parameter please open the Astar_rigid.py and scroll down to line 292 and change the parameter as desired.
+  
 ## Simulation part 1 ( User inputs to program )
 <image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Input%20from%20terminal%20.JPEG " width="640" height="480" ></image>
 
@@ -34,6 +35,9 @@ The implementation code is done using Python 3.
 
 ## Simulation part 3 ( Video showing simulation )
 <image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/optimal%20path.gif " width="640" height="480" ></image>
+
+## Where to change goal_radius parameter (Astar_rigid.py):
+<image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Main%execution%20.JPEG " width="640" height="480" ></image>
 
 ## Astar_rigid.py EXECUTION TIME :
 <p>To execute the algorithm takes about 30 seconds
