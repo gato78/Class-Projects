@@ -28,13 +28,13 @@ The implementation code is done using Python 3.
   <p>Program will then execute and once data results are obtained it will displayed them as a matplotlib/opencv animation 
 
 ## Simulation part 1 ( User inputs to program )
-<image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Input%20from%20terminal%20.JPEG " width="640" height="480" ></image>
+<div align=center><image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Input%20from%20terminal%20.JPEG " width="640" height="480" ></image></div>
 
 ## Simulation part 2 ( Astar Algorithm visiting nodes in the map space )
-<image src=" " width="640" height="480" ></image>
+<div align=center><image src=" " width="640" height="480" ></image></div>
 
 ## Simulation part 3 ( Astar Algorithm showing shortest path between start and goal nodes )
-<image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/optimal%20path.gif " width="640" height="480" ></image>
+<div align=center><image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/optimal%20path.gif " width="640" height="480" ></image></div>
 
 ## Simulation part 4 ( Video showing simulation )
 
