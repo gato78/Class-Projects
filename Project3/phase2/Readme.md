@@ -23,7 +23,7 @@ The implementation code is done using Python 3.
 <p>IMPORTANT NOTE: 
 
 ## Simulation part 1 ( User inputs to program )
-<image src="Input from terminal.jpg " width="640" height="480" ></image>
+<image src="Input from terminal.jpeg " width="640" height="480" ></image>
 
 ## Simulation part 2 ( Astar Algorithm visiting nodes in the map space )
 <image src=" " width="640" height="480" ></image>
