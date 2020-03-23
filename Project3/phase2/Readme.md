@@ -16,17 +16,22 @@ The implementation code is done using Python 3.
   <p> opencv
   <p> matplotlib  
 <p> How to run program:
+  The project consists of 2 files:
+  Astar_rigid.py
+  ObstacleMap.py
+  Please make sure to have both files in the same folder before running simulation.
+  The main file is the Astar_rigid.py file. This file calls the ObstacleMap since this file contains the obstacles space.
+  The simulation is mostly console terminal driven and the only parameter that can not be changed from the console terminal is the goal_radius. To change this parameter please open the Astar_rigid.py and scroll down to line 292 and change the parameter as desired.
   <p>Open console terminal and run command below:
     <p>python Astar_rigid.py
   <p>Program should then start and ask the user to input start node coordinates and angle, goal node coordinates, obstacles clearance, robot radius and step(distance to move).
-  <p>Program will then execute and once data results are obtained it will displayed them as a pygame animation 
-<p>IMPORTANT NOTE: 
+  <p>Program will then execute and once data results are obtained it will displayed them as a matplotlib/opencv animation 
 
 ## Simulation part 1 ( User inputs to program )
 <image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Input%20from%20terminal%20.JPEG " width="640" height="480" ></image>
 
 ## Simulation part 2 ( Astar Algorithm visiting nodes in the map space )
-<image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/Searching%20nodes.gif " width="640" height="480" ></image>
+<image src=" " width="640" height="480" ></image>
 
 ## Simulation part 3 ( Astar Algorithm showing shortest path between start and goal nodes )
 <image src="https://github.com/gato78/Class-Projects/blob/master/Project3/phase2/optimal%20path.gif " width="640" height="480" ></image>
