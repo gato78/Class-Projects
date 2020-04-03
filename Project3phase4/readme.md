@@ -3,7 +3,7 @@
 ## 1. Make sure you have following files in your source code directory, in order to connect to v-rep remote API.
 1. vrep.py
 2. vrepConst.py
-3. the appropriate remote API library: "remoteApi.dll" (Windows), "remoteApi.dylib" (Mac) or "remoteApi.so" (Linux)
+3. The appropriate remote API library: "remoteApi.dll" (Windows), "remoteApi.dylib" (Mac) or "remoteApi.so" (Linux)
 
 These structural files are downloaded by following the instruction from CoppeliaRobotics: https://www.coppeliarobotics.com/helpFiles/en/remoteApiClientSide.htm
 
