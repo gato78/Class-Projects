@@ -4,6 +4,7 @@
 1. vrep.py
 2. vrepConst.py
 3. the appropriate remote API library: "remoteApi.dll" (Windows), "remoteApi.dylib" (Mac) or "remoteApi.so" (Linux)
+These structural files are downloaded from: https://www.coppeliarobotics.com/helpFiles/en/remoteApiClientSide.htm
 
 ## 2. In V-REP, load the scene and robot. 
 1. Open "new_map.ttt" file with V-REP. 
