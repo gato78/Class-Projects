@@ -16,6 +16,6 @@ Select the turtlebot and click 'Object/item shift' button and adjust the X, Y co
 <img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase4/initialize%20position.png"/>
 
 ## 4. The program is supposed to be executed with python. Start the simulation before executing the program.
-When running the .py and enter the start and goal points, the programm will first begin searching and generate the animation in a matplot window. After the robot reaches the goal ponit with the optimal path showing in that window, the v-rep will automatically start moving and follow the exact path to reach the goal.
+When running the .py and enter the start and goal points, the program will first begin searching and generate the animation in a matplot window. After the robot reaches the goal point with the optimal path showing in that window, the turtlebot in v-rep will automatically start moving and follow the exact same path as in program to reach the goal.
 
 
