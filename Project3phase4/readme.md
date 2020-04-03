@@ -15,7 +15,7 @@ These structural files are downloaded by following the instruction from Coppelia
 Select the turtlebot and click 'Object/item shift' button and adjust the X, Y coordinates in position window.
 <img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase4/initialize%20position.png"/>
 
-## 4. The program is supposed to be executed with python 3. Start the simulation before executing the program.
+## 4. The program is supposed to be executed with python. Start the simulation before executing the program.
+When running the .py and enter the start and goal points, the programm will first begin searching and generate the animation in a matplot window. After the robot reaches the goal ponit with the optimal path showing in that window, the v-rep will automatically start moving and follow the exact path to reach the goal.
 
-## 5. When running the .py and enter the start and goal points, the programm will first begin searching and generate the animation in a matplot window. After the robot reaches the goal ponit with the optimal path showing in that window, the v-rep will automatically start moving and follow the exact path to reach the goal.   
 
