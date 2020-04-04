@@ -7,7 +7,7 @@
 
 These structural files are downloaded from CoppeliaRobotics: https://www.coppeliarobotics.com/helpFiles/en/remoteApiClientSide.htm
 
-## 2. In V-REP, load the scene and robot. 
+## 2. In v-rep, load the scene and robot. 
 1. Open "new_map.ttt" file with V-REP. 
 2. The turtlebot2 model script has been simplified and saved as 'simplified model.ttt' and should be already loaded in the map file.
 
