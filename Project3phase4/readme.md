@@ -12,7 +12,7 @@ These structural files are downloaded from CoppeliaRobotics: https://www.coppeli
 2. The turtlebot2 model script has been simplified and saved as 'simplified model.ttt' and should be already loaded in the map file.
 
 ## 3. The robot should be manually placed at the expected starting position before starting the simulation.
-Select the turtlebot and click 'Object/item shift' button and adjust the X, Y coordinates in 'position' tab with a initial orientation as 0 radians.
+Select the turtlebot and click 'Object/item shift' button to adjust the X, Y coordinates in 'position' tab with a initial orientation as 0 radians.
 The origin is present at the center of the workspace.
 <img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase4/initialize%20position.png"/>
 
