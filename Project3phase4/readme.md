@@ -25,3 +25,4 @@ When running the .py and enter the start and goal points, the program will first
 <source src="https://github.com/gato78/Class-Projects/tree/master/Project3phase4/Simulation%20results/prj3_phase4scenario_1.ogg" type="video/ogg">
 Your browser does not support the video tag
 </video> 
+<image src="https://github.com/gato78/Class-Projects/tree/master/Project3phase4/Simulation%20results/prj3_phase4scenario_1.gif " width="640" height="480" ></image>
