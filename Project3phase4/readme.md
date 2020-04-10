@@ -19,4 +19,5 @@ The origin is present at the center of the workspace.
 ## 4. The program is supposed to be executed with python. Start the simulation before executing the program.
 When running the .py and enter the start and goal points, the program will first begin searching and generate the animation in a matplot window. After the robot reaches the goal point with the optimal path showing in that window, the turtlebot in v-rep will automatically start moving and follow the exact same path as in program to reach the goal.
 
-
+## 5. Video showing Simulation for scenarion 1
+<image src="https://github.com/gato78/Class-Projects/blob/master/Project3phase4/Simulation results/prj3_phase4scenario_1.mp4 " width="640" height="480" ></image>
