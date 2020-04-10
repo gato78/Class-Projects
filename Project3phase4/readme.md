@@ -21,3 +21,6 @@ When running the .py and enter the start and goal points, the program will first
 
 ## 5. Video showing Simulation for scenario 1: start(-4,-3)  goal(0,-3)
 <image src="https://github.com/gato78/Class-Projects/tree/master/Project3phase4/Simulation%20results/prj3-phase4scenario-1.gif " width="640" height="480" ></image>
+
+## 6. Video showing Simulation for scenario 2: start(-4,-4.5)  goal(4.5,2.5)
+<image src="https://github.com/gato78/Class-Projects/tree/master/Project3phase4/Simulation%20results/prj3-phase4scenario-2.gif " width="640" height="480" ></image>
