@@ -14,6 +14,7 @@ These structural files are downloaded from CoppeliaRobotics: https://www.coppeli
 ## 3. The robot should be manually placed at the expected starting position before starting the simulation.
 Select the turtlebot and click 'Object/item shift' button to adjust the X, Y coordinates in 'position' tab with a initial orientation as 0 radians.
 The origin is present at the center of the workspace.  
+
 <img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase4/initialize%20position.png"/>
 
 ## 4. The program is supposed to be executed with python. Start the simulation before executing the program.
