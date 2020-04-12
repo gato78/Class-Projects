@@ -43,19 +43,18 @@
   
 ## Simulation part 1 ( User inputs to program )
 <img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/terminal%20.JPEG " width="640 "/>
-<image src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/terminal%20.JPEG " width="640" height="480" ></image>
+
 
 ## Simulation part 2 ( Astar Algorithm visiting nodes in the map space )
 <img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/nodes.gif " width="640 "/>
-<image src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/nodes.gif " width="640" height="480" ></image>
+
 
 ## Simulation part 3 ( Video showing simulation )
 <img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/foto1.gif " width="640" height="480" width="640 "/>
-<image src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/foto1.gif " width="640" height="480" ></image>
+
 
 ## Where to change goal_radius parameter (Astar_rigid.py):
 <img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3pahse3/foto2.JPEG " width="640 "/>
-<image src="https://github.com/gato78/Class-Projects/blob/master/Project3pahse3/foto2.JPEG " width="640" height="480" ></image>
 
 ## Astar_rigid.py EXECUTION TIME :
 <p>Program will take approximately 10 to 20 seconds to compute optimal path and simulation display will vary based on user input parameters between 12 minutes to 45 minutes or so depending on how small are the rpms provided by the user. For example for RPM1 = 12 RPM2 = 24 it should take about 12 minutes to draw visited nodes path and optimal path.
