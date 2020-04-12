@@ -8,7 +8,11 @@ from matplotlib.patches import Ellipse
 import cv2
 from ObstacleMap import ObsMap
 
-def generateNeighborNodes(Xi,Yi,ThetaDeg,rpm_1,rpm_2):		   # UL = velocity left, UR = velocity right
+# Generating neighbor nodes
+def generateNeighborNodes(node, rpm_1, rpm_2):		   # UL = velocity left, UR = velocity right
+	Xi = float(node[0])
+	Yi = float(node[1])
+	ThetaDeg = float(node[2])
 	neighbors = []
 	RPM1 = rpm_1
 	RPM2 = rpm_2
@@ -16,14 +20,14 @@ def generateNeighborNodes(Xi,Yi,ThetaDeg,rpm_1,rpm_2):		   # UL = velocity left,
 	for action in actions:
 		X1, Y1, Theta, curve_len = calculate_coord(Xi,Yi,ThetaDeg,action[0],action[1]) # (0,0,45) hypothetical start configuration
 		neighbors.append((round(X1,3), round(Y1,3), round(Theta),action[0],action[1], round(curve_len,3)))
-	# for node in neighbors:
-		# print((node[0], node[1], node[2], node[3], node[4]))
 	return neighbors
-	
+
+# calculating distance between 2 coordinate points 	
 def calc_distance(x1, y1, x2, y2):
 	dist = m.sqrt((x2 - x1)**2 + (y2 - y1)**2)
 	return dist
 
+# Calculating coordinates of new node
 def calculate_coord(Xi, Yi, ThetaDeg, UL, UR):
 	t = 0
 	r = 0.038			# turtlebot tire radius (mm)
@@ -50,15 +54,15 @@ def calculate_coord(Xi, Yi, ThetaDeg, UL, UR):
 
 # Custom input function to verify inputs are integer numbers
 def inputIntegerNumber(msg):
-  while True:
-	try:
-	   usrInput = float(input(msg))		
-	except ValueError:
-	   print("Value must be a number! Please try again!")
-	   continue
-	else:
-	   return usrInput 
-	   break 
+	while True:
+		try:
+			usrInput = float(input(msg))		
+		except ValueError:
+			print("Value must be a number! Please try again!")
+			continue
+		else:
+			return usrInput 
+			break 
 
 # Function to get input start and goal node coordinates along with other parameters
 def get_input_coordinates():
@@ -73,8 +77,8 @@ def get_input_coordinates():
 	print("Rigid Robot Map Obstacles Clearance (c) and Robot Radius (r)")
 	c = inputIntegerNumber("Please enter obstacle clearance (c) : ")
 	r = inputIntegerNumber("Please enter robot radius (r) : ")
-	rpm1 = inputIntegerNumber("Please enter RPM1 value (from 5 to 10) : ")
-	rpm2 = inputIntegerNumber("Please enter RPM2 value (from 10 to 20) : ")
+	rpm1 = inputIntegerNumber("Please enter RPM1 value (from 5 to 15) : ")
+	rpm2 = inputIntegerNumber("Please enter RPM2 value (from 15 to 30) : ")
 	
 	while inputStartFlag:
 		print("Please enter Start-Node (x,y) Coordinates")
@@ -110,5 +114,3 @@ def get_input_coordinates():
 	print("Running A star Algorithm Simulation...")
 	
 	return start_node, goal_node, c, r , rpm1, rpm2 
-
-
