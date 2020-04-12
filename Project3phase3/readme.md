@@ -42,15 +42,19 @@
 <p>IMPORTANT : The simulation is mostly console driven and the only parameter that can not be changed from console is the goal threshold radius. This parameter can be changed in line 347 in the Astar_rigid.py file.
   
 ## Simulation part 1 ( User inputs to program )
+<img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/terminal%20.JPEG " width="640 "/>
 <image src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/terminal%20.JPEG " width="640" height="480" ></image>
 
 ## Simulation part 2 ( Astar Algorithm visiting nodes in the map space )
+<img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/nodes.gif " width="640 "/>
 <image src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/nodes.gif " width="640" height="480" ></image>
 
 ## Simulation part 3 ( Video showing simulation )
+<img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/foto1.gif " width="640" height="480" width="640 "/>
 <image src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/foto1.gif " width="640" height="480" ></image>
 
 ## Where to change goal_radius parameter (Astar_rigid.py):
+<img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3pahse3/foto2.JPEG " width="640 "/>
 <image src="https://github.com/gato78/Class-Projects/blob/master/Project3pahse3/foto2.JPEG " width="640" height="480" ></image>
 
 ## Astar_rigid.py EXECUTION TIME :
