@@ -114,3 +114,21 @@ def get_input_coordinates():
 	print("Running A star Algorithm Simulation...")
 	
 	return start_node, goal_node, c, r , rpm1, rpm2 
+
+# Visited nodes discrete matrix to check for duplicates
+def visited_nodes_duplicate():
+	visited_node_duplicate = {}
+	for x in np.arange(-50,51,1)/10:
+		for y in np.arange(-50,51,1)/10:
+			for theta in np.arange(0,120,10)/10:
+				visited_node_duplicate[x,y,theta]=0
+	return visited_node_duplicate
+
+# Node Cost discrete matrix
+def exploredNodesCost_discrete():
+	explrdNdCost_discrete = {}
+	for x in np.arange(-50,51,1)/10:
+		for y in np.arange(-50,51,1)/10:
+			for theta in np.arange(0,120,10)/10:
+				explrdNdCost_discrete[x,y,theta]=0
+	return explrdNdCost_discrete
