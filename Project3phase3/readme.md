@@ -3,19 +3,12 @@
 ## PROJECT DESCRIPTION:
 <p>The objective of this project is to implement A star algorithm to drive a robot in a given map environment considering differential drive constraints ( 8-connected action space).
 <p>The implementation of the algorithm will take into account the following input parameters: 
-
 <li>RPM1 (minimum rpm)</li>
-
 <li>RPM2 (maximum rpm)</li>
-
 <li>robot radius</li>
-
 <li>obstacle clearance</li>
-
 <li>star node coordinates and orientation angle</li>
-
 <li>goal node coordinates</li>
-
 <li>goal_radius (can not be changed from user console terminal, see below paragraphs to change it)</li>
 
 ## HOW TO RUN Astar_rigid.py
@@ -50,11 +43,11 @@
 
 
 ## Simulation part 3 ( Video showing simulation )
-<img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/foto1.gif " width="640" height="480" width="640 "/>
+<img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/prj3-phase3-video.gif " width="640" height="480" width="640 "/>
 
 
 ## Where to change goal_radius parameter (Astar_rigid.py):
-<img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3pahse3/foto2.JPEG " width="640 "/>
+<img width="750" height="450" src="https://github.com/gato78/Class-Projects/blob/master/Project3phase3/foto2.JPEG " width="640 "/>
 
 ## Astar_rigid.py EXECUTION TIME :
 <p>Program will take approximately 10 to 20 seconds to compute optimal path and simulation display will vary based on user input parameters between 12 minutes to 45 minutes or so depending on how small are the rpms provided by the user. For example for RPM1 = 12 RPM2 = 24 it should take about 12 minutes to draw visited nodes path and optimal path.
