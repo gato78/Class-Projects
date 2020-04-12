@@ -279,3 +279,82 @@ def backtrackingStartGoalPath(start,goal_thd,explored_path):
 		goalpath = explored_path[goalpath]
 	pathlist.reverse()
 	return pathlist	
+	
+# Plotting curve line between 2 coordinate points
+def plot_curved_line(nodePar,nodeCh,linecolor):
+	t = 0
+	r = 0.038			# turtlebot tire radius (mm)
+	L = 0.354		   # turtlebot distance between wheels	(mm)
+	dt = 0.1			 # reasonable dt assigned 
+	Xn = nodePar[0]
+	Yn = nodePar[1]
+	ThetaRad = 3.14 * nodePar[2] / 180
+	UL = nodeCh[3]
+	UR = nodeCh[4]
+
+	while t<1:
+		t = t + dt
+		Xs = Xn
+		Ys = Yn
+		Xn += (r /2)* (UL + UR) * m.cos(ThetaRad) * dt
+		Yn += (r /2 )* (UL + UR) * m.sin(ThetaRad) * dt
+		ThetaRad += (r /L) * (UR - UL) * dt
+		plt.plot([Xs, Xn], [Ys, Yn], color=linecolor,linewidth=0.6)
+	ThetaDeg = 180 * (ThetaRad) / 3.14
+	if ThetaDeg >= 360:
+		ThetaDeg = (ThetaDeg - 360)
+	if ThetaDeg <= -360:
+		ThetaDeg = (ThetaDeg + 360)
+	return Xn, Yn, ThetaDeg
+
+# Buffering image 
+def bufImage():
+	Obs_space.fig.canvas.draw()
+	mapImg = np.frombuffer(Obs_space.fig.canvas.tostring_rgb(), dtype=np.uint8).reshape(Obs_space.fig.canvas.get_width_height()[::-1] + (3,))
+	mapImg = cv2.cvtColor(mapImg,cv2.COLOR_RGB2BGR)
+	return mapImg
+
+# Simulating optimal path 
+def showSimulation(node_list):
+	print("Displaying Simulation")
+	for node in node_list:
+		plot_curved_line(node[0],node[1],"orange")
+		mapImg = bufImage()
+		if cv2.waitKey(1) == ord('q'):	
+			exit()
+		cv2.imshow('A star', mapImg)
+
+	AstarLen = len(AstarPath)-1
+	i = 0
+	AstarPathNode = None
+	while i < AstarLen:
+		AstarPathNode = (AstarPath[i],AstarPath[i+1])
+		plot_curved_line(AstarPathNode[0],AstarPathNode[1],'black')
+		mapImg = bufImage()		
+		i = i+1
+		cv2.imshow('A star', mapImg)
+		if cv2.waitKey(1) == ord('q'):
+			exit()
+	cv2.imshow('A star', mapImg)
+	
+# Main routine
+if __name__ == '__main__':
+	map_x_min = -5
+	map_y_min = -5
+	map_x_max = 5
+	map_y_max = 5
+	rad = m.pi/180
+	goal_radius = 0.3													# Goal Radius set at 3 by default
+	start_node, goal_node, c, r, rpm1, rpm2 = get_input_coordinates()		# Gets user input and formats it for algorithm processing
+	vis_nd_duplicate = visited_nodes_duplicate()				# Generate Discrete visited nodes map to check for duplicate nodes
+	visited_nodes, goal_threshold,visCurrListChildPar = applyingAstarAlgorithm(start_node, goal_node,goal_radius, vis_nd_duplicate, c, r, rpm1, rpm2)	# Applying Djikstra Algorithm 
+	AstarPath = backtrackingStartGoalPath(start_node,goal_threshold,visited_nodes)			# Extract Shortest path from visited nodes list
+	Obs_space = ObsMap(c,r)										# Creating an instance of the Obstacle Space Object 
+	goal_circ = plt.Circle((goal_node[0],goal_node[1]), radius=goal_radius, color='#F0DB4F')	# Drawing a goal threshold area in the map
+	Obs_space.ax.add_patch(goal_circ)							# Adding goal circle drawing to map
+	goal_circ = plt.Circle((start_node[0],start_node[1]), radius=0.1, color='#333399')	# Drawing a goal threshold area in the map
+	Obs_space.ax.add_patch(goal_circ)							# Adding start circle drawing to map
+	showSimulation(visCurrListChildPar)								# Executing A star Simulation
+	if cv2.waitKey(0):
+		exit()
+	cv2.destroyAllWindows()
