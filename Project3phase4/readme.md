@@ -1,3 +1,27 @@
+
+# PROJECT 3 - PHASE 4
+# Project Description:
+<p>The objective of this project is to implement A star algorithm to drive the trutlebot in a vrep map environment considering differential drive constraints ( 8-connected action space).
+<p>The implementation of the algorithm will take into account the following input parameters: 
+<li>RPM1 (minimum rpm)</li>
+<li>RPM2 (maximum rpm)</li>
+<li>robot radius</li>
+<li>obstacle clearance</li>
+<li>star node coordinates and orientation angle</li>
+<li>goal node coordinates</li>
+<li>goal_radius (can not be changed from user console terminal, change goal_radius in line 387 in main.py)</li>
+
+# Libraries used:
+<li>Python version used 3.6.5</li>
+<li>vrep version 4 ( CoppelliaSim player)</li>
+ 
+# Python libraries needed:
+<li>numpy</li>
+<li>math</li>
+<li>opencv</li>
+<li>matplotlib</li>
+
+
 # To run the simulation, please read the following steps:
 
 ## 1. Make sure you have following files in your source code directory, in order to connect to v-rep remote API.
