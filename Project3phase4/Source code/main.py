@@ -271,3 +271,139 @@ def backtrackingStartGoalPath(start,goal_thd,explored_path):
 	pathlist.reverse()
 	return pathlist	
 	
+# Plotting curve line between 2 coordinate points
+def plot_curved_line(nodePar,nodeCh,linecolor):
+	t = 0
+	r = 0.038			# turtlebot tire radius (mm)
+	L = 0.354		   # turtlebot distance between wheels	(mm)
+	dt = 0.1			 # reasonable dt assigned 
+	Xn = nodePar[0]
+	Yn = nodePar[1]
+	ThetaRad = 3.14 * nodePar[2] / 180
+	UL = nodeCh[3]
+	UR = nodeCh[4]
+
+	while t<1:
+		t = t + dt
+		Xs = Xn
+		Ys = Yn
+		Xn += (r /2)* (UL + UR) * m.cos(ThetaRad) * dt
+		Yn += (r /2 )* (UL + UR) * m.sin(ThetaRad) * dt
+		ThetaRad += (r /L) * (UR - UL) * dt
+		plt.plot([Xs, Xn], [Ys, Yn], color=linecolor)
+	ThetaDeg = 180 * (ThetaRad) / 3.14
+	if ThetaDeg >= 360:
+		ThetaDeg = (ThetaDeg - 360)
+	if ThetaDeg <= -360:
+		ThetaDeg = (ThetaDeg + 360)
+	return Xn, Yn, ThetaDeg
+
+# Buffering image 
+def bufImage():
+	Obs_space.fig.canvas.draw()
+	mapImg = np.frombuffer(Obs_space.fig.canvas.tostring_rgb(), dtype=np.uint8).reshape(Obs_space.fig.canvas.get_width_height()[::-1] + (3,))
+	mapImg = cv2.cvtColor(mapImg,cv2.COLOR_RGB2BGR)
+	return mapImg
+
+# Simulating optimal path 
+def showSimulation(node_list):
+	print("Displaying Simulation")
+	AstarLen = len(AstarPath)-1
+	i = 0
+	AstarPathNode = None
+	while i < AstarLen:
+		AstarPathNode = (AstarPath[i],AstarPath[i+1])
+		plot_curved_line(AstarPathNode[0],AstarPathNode[1],'red')
+		mapImg = bufImage()		
+		i = i+1
+		cv2.imshow('A star', mapImg)
+		if cv2.waitKey(1) == ord('q'):
+			exit()
+	cv2.imshow('A star', mapImg)
+	
+#connect to v-rep
+def execute(operation):
+	vrep.simxFinish(-1)
+	clientID = vrep.simxStart("127.0.0.1", 19999, True, True, 5000, 5)
+	if clientID != -1:
+		print('connection Success')
+	else:
+		print('Failed connecting to remote API server')
+
+	baseName = 'Turtlebot2'
+	jointName = ['wheel_left_joint', 'wheel_right_joint']
+	tstep = 0.05
+	jointNum = len(jointName)
+
+	vrep.simxSetFloatingParameter(clientID, vrep.sim_floatparam_simulation_time_step, tstep, vrep.simx_opmode_oneshot)
+	vrep.simxSynchronous(clientID, True) 
+	vrep.simxStartSimulation(clientID, vrep.simx_opmode_oneshot)
+
+	jointHandle = []
+	for joint in jointName:
+		_, returnHandle = vrep.simxGetObjectHandle(clientID, joint, vrep.simx_opmode_blocking)
+		jointHandle.append(returnHandle)
+
+	lastCmdTime=vrep.simxGetLastCmdTime(clientID)
+
+	for move in operation:
+		if vrep.simxGetConnectionId(clientID) != -1:
+			print(move)
+			
+			for i in range(jointNum):
+				_, jpos = vrep.simxGetJointPosition(clientID, jointHandle[i], vrep.simx_opmode_buffer)
+				jointConfig = np.zeros((jointNum,))
+				jointConfig[i] = jpos
+
+			vrep.simxPauseCommunication(clientID, True)
+			for i in range(jointNum):
+				vrep.simxSetJointTargetVelocity(clientID, jointHandle[i], move[i], vrep.simx_opmode_streaming) #*2*math.pi/60
+			vrep.simxPauseCommunication(clientID, False)
+			if move[0] == move[1]:
+				stept = 1370	
+			else:
+				stept = 810	    
+
+			while True:
+				currentCmdTime=vrep.simxGetLastCmdTime(clientID)
+				dt = currentCmdTime - lastCmdTime
+				vrep.simxSynchronousTrigger(clientID)
+				_, exT = vrep.simxGetPingTime(clientID)
+				if dt >= stept:
+					break
+
+			currentCmdTime=vrep.simxGetLastCmdTime(clientID)
+			lastCmdTime=currentCmdTime
+
+	vrep.simxFinish(clientID)
+
+# Main routine
+if __name__ == '__main__':
+	map_x_min = -5
+	map_y_min = -5
+	map_x_max = 5
+	map_y_max = 5
+	rad = m.pi/180
+	goal_radius = 0.3													# Goal Radius set at 3 by default
+	start_node, goal_node, c, r, rpm1, rpm2 = get_input_coordinates()		# Gets user input and formats it for algorithm processing
+	vis_nd_duplicate = visited_nodes_duplicate()				# Generate Discrete visited nodes map to check for duplicate nodes
+	visited_nodes, goal_threshold,childParPath = applyingAstarAlgorithm(start_node, goal_node,goal_radius, vis_nd_duplicate, c, r, rpm1, rpm2)	# Applying Djikstra Algorithm 
+	AstarPath = backtrackingStartGoalPath(start_node,goal_threshold,visited_nodes)			# Extract Shortest path from visited nodes list
+	RPMs_list = [[0,0]]
+	for node in AstarPath[1:]:
+			RPMs_list.append([int(node[3]),int(node[4])])
+	RPMs_list.append([0,0])
+	print(RPMs_list)
+	print("RPM list length =",len(RPMs_list))
+	
+	Obs_space = ObsMap(c,r)										# Creating an instance of the Obstacle Space Object 
+	goal_circ = plt.Circle((goal_node[0],goal_node[1]), radius=goal_radius, color='#F0DB4F')	# Drawing a goal threshold area in the map
+	Obs_space.ax.add_patch(goal_circ)							# Adding goal circle drawing to map
+	goal_circ = plt.Circle((start_node[0],start_node[1]), radius=0.1, color='#333399')	# Drawing a goal threshold area in the map
+	Obs_space.ax.add_patch(goal_circ)							# Adding start circle drawing to map
+	showSimulation(childParPath)								# Executing A star Simulation
+	execute(RPMs_list)
+	print("program completed!!")
+	if cv2.waitKey(0):
+		exit()
+	cv2.destroyAllWindows()
