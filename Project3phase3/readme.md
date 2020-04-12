@@ -1,4 +1,4 @@
-# Project 3 - PHASE 2
+# Project 3 - PHASE 3
 
 ## PROJECT DESCRIPTION:
 <p>The objective of this project is to implement A star algorithm to drive a robot in a given map environment considering differential drive constraints ( 8-connected action space).
