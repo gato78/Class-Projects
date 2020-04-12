@@ -134,3 +134,140 @@ def exploredNodesCost_discrete():
 			for theta in np.arange(0,120,10)/10:
 				explrdNdCost_discrete[x,y,theta]=0
 	return explrdNdCost_discrete
+	
+# Check if node is duplicate 
+def is_node_duplicate(curr_nd,vis_nd_dupl):
+	duplicate = False
+	if curr_nd in vis_nd_dupl:
+		if vis_nd_dupl[curr_nd] == 1:
+			duplicate = True
+		else:
+			vis_nd_dupl[curr_nd] = 1
+	return duplicate
+
+# Rounding nodes to one decimal point
+def roundToNearestPoint1(node):
+	if node[2] < 0:
+		theta_disc	 = node[2] + 360
+	else:
+		theta_disc = node[2]
+	theta_disc = int(theta_disc/30)
+	rnd_node = (round(node[0],1),round(node[1],1),theta_disc)
+	return rnd_node
+
+# Calculate heuristic distance between 2 nodes
+def euclidean_dist(n_node, g_node):
+	distX = g_node[0] - n_node[0]
+	distY = g_node[1] - n_node[1]
+	euclDist = m.sqrt((distX)**2 + (distY)**2)
+	return euclDist
+
+# Defining Obstacle Space using Half Plane Equations while also adding obstacle clearance and robot radius
+def rigid_robot_obstacle_space(x,y,clearance,radius): #clearance = 0.025,radius = 0.127
+	obstacle = False
+	coord_offset_x= 0
+	coord_offset_y = 0
+	
+	offset_dist = clearance + radius
+	
+	if ((x - coord_offset_x)**2 + (y - coord_offset_y)**2 - (1 + offset_dist)**2) <= 0:	# Circle in center of map
+		obstacle = True
+
+	if ((x - (coord_offset_x + 2))**2 + (y - (coord_offset_y + 3))**2 - (1 + offset_dist)**2) <= 0:	# Circle on top corner of map
+		obstacle = True
+
+	if ((x - (coord_offset_x - 2))**2 + (y - (coord_offset_y - 3))**2 - (1 + offset_dist)**2) <= 0:	# Circle on left lower corner of map
+		obstacle = True
+
+	if ((x - (coord_offset_x + 2))**2 + (y - (coord_offset_y - 3))**2 - (1 + offset_dist)**2) <= 0:	# Circle on right lower corner of map
+		obstacle = True
+			
+	if ( x + 4.75 + offset_dist >= 0) and (x + 3.25	 - offset_dist<= 0) and (y - 0.75 - offset_dist <= 0) and (y + 0.75 + offset_dist >= 0):	   #  x1,x2,y1 UP, y2 DWN  --> square on left side of map 
+		obstacle = True
+
+	if ( x - 3.25 + offset_dist >= 0) and (x - 4.75 - offset_dist <= 0) and (y - 0.75 - offset_dist <= 0) and (y + 0.75 + offset_dist >= 0):	   # square on right side of map 
+		obstacle = True
+			
+	if (x + 2.75 + offset_dist >= 0) and (x + 1.25 - offset_dist <= 0) and (y - 2.25 + offset_dist >= 0) and (y - 3.75 - offset_dist <= 0):	   # square on top left side of map 
+		obstacle = True
+			
+	return obstacle	
+
+# Checking for node to see if it has valid coordinates
+def isNewNodeValid(curr_nd, clearance, radius):
+		valid = False
+		if curr_nd[0] < -5 or curr_nd[1] < -5 :	  
+			valid = True
+		if curr_nd[0] > 5 or curr_nd[1] > 5 :
+			valid = True
+		if rigid_robot_obstacle_space(curr_nd[0],curr_nd[1],clearance,radius) == True :
+			valid = True
+		return valid
+
+# Implementing A star Algorithm to obtain list of visited nodes	
+def applyingAstarAlgorithm(start_node, goal_nd, goal_radius, visited_duplicate,clearance,radius, rpm1, rpm2):
+	angleList = [60*rad, 30*rad, 0.0, -30*rad, -60*rad]
+	visitedListChildPar = []
+	node_goal_thd = (0,0,0)
+	exploredNodesCost = exploredNodesCost_discrete()  # Contains list of explored nodes cost
+	exploredNodesCost[start_node] = 0
+	visited_duplicate[start_node] = 1
+	Gcost = {} 
+	Fcost = {} 
+	Gcost[start_node] = 0 
+	Fcost[start_node] = euclidean_dist(start_node, goal_nd)
+	closedList = set()
+	openList = set([start_node])
+	exploredNodesPath = {}
+	while len(openList) > 0:
+		neighbors_list = []
+		current = None
+		currF = None
+		for node in openList:
+			pos_index = (node[0],node[1],node[2])
+			if current	is None or Fcost[pos_index] < currF:
+				currF  = Fcost[pos_index]
+				current = node
+		rnd_curNode = roundToNearestPoint1(current)	  
+		rnd_curCost =  float(exploredNodesCost[rnd_curNode])
+		if euclidean_dist(current, goal_nd) <= goal_radius:
+			node_goal_thd = current
+			return exploredNodesPath, node_goal_thd, visitedListChildPar
+		openList.remove(current)
+		closedList.add(current)
+		neighbors_list = generateNeighborNodes(current, rpm1, rpm2)
+		current_index = (current[0],current[1],current[2])
+		for newNeighbor in neighbors_list:
+			#if newNeighbor is not in valid coordinates
+			if isNewNodeValid(newNeighbor, clearance, radius) :
+				continue	# then skip new neighbor node
+			if newNeighbor in closedList:
+				continue
+			rnd_newNode = roundToNearestPoint1(newNeighbor) ##
+			newNeighborGcost = Gcost[current_index] + newNeighbor[5]
+			rnd_newCost = rnd_curCost + newNeighbor[5]
+			#if newNeighbor not in openList:
+			if is_node_duplicate(rnd_newNode,visited_duplicate) == False:
+				openList.add(newNeighbor) 
+				visitedListChildPar.append((current,newNeighbor))
+			elif newNeighborGcost >=exploredNodesCost[rnd_newNode]:
+				continue
+			exploredNodesCost[rnd_newNode] = rnd_newCost
+			exploredNodesPath[newNeighbor] = current
+			cost_index =(newNeighbor[0],newNeighbor[1],newNeighbor[2])
+			Gcost[cost_index] = newNeighborGcost
+			visitedListChildPar.append((current,newNeighbor))
+			Hcost = euclidean_dist(newNeighbor, goal_nd)
+			Fcost[cost_index] = Gcost[cost_index] + Hcost
+			
+# Implementing backtracking function to retrieve optimal path from visited nodes   
+def backtrackingStartGoalPath(start,goal_thd,explored_path):
+	pathlist = []
+	goalpath = goal_thd
+	pathlist.append(goal_thd)
+	while goalpath != start:
+		pathlist.append(explored_path[goalpath])
+		goalpath = explored_path[goalpath]
+	pathlist.reverse()
+	return pathlist	
+	
