@@ -132,3 +132,30 @@ def exploredNodesCost_discrete():
 			for theta in np.arange(0,120,10)/10:
 				explrdNdCost_discrete[x,y,theta]=0
 	return explrdNdCost_discrete
+	
+# Check if node is duplicate 
+def is_node_duplicate(curr_nd,vis_nd_dupl):
+	duplicate = False
+	if curr_nd in vis_nd_dupl:
+		if vis_nd_dupl[curr_nd] == 1:
+			duplicate = True
+		else:
+			vis_nd_dupl[curr_nd] = 1
+	return duplicate
+
+# Rounding nodes to one decimal point
+def roundToNearestPoint1(node):
+	if node[2] < 0:
+		theta_disc	 = node[2] + 360
+	else:
+		theta_disc = node[2]
+	theta_disc = int(theta_disc/30)
+	rnd_node = (round(node[0],1),round(node[1],1),theta_disc)
+	return rnd_node
+
+# Calculate heuristic distance between 2 nodes
+def euclidean_dist(n_node, g_node):
+	distX = g_node[0] - n_node[0]
+	distY = g_node[1] - n_node[1]
+	euclDist = m.sqrt((distX)**2 + (distY)**2)
+	return euclDist
